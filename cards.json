@@ -1,72 +1,226 @@
 [
-    {
-        "question": "Vous recevez une offre d'emploi à temps partiel. L'acceptez-vous ?",
-        "hint": "Accepter cette offre peut augmenter vos revenus, mais cela peut réduire votre temps libre.",
-        "optionA": {
-            "text": "Accepter l'offre",
-            "effects": {"budget": 10, "loisirs": -5, "epargne": 0},
-            "explanation": "En acceptant, vous augmentez vos revenus mais réduisez vos loisirs."
-        },
-        "optionB": {
-            "text": "Refuser l'offre",
-            "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
-            "explanation": "En refusant, vous gardez votre temps libre mais vous ne bénéficiez pas de revenus supplémentaires."
-        }
+  {
+    "question": "Vous recevez une offre d'emploi à temps partiel. L'acceptez-vous ?",
+    "hint": "Accepter l'offre augmente vos revenus mais réduit votre temps libre.",
+    "optionA": {
+      "text": "Accepter l'offre",
+      "effects": {"budget": 15, "loisirs": -5, "epargne": 0},
+      "explanation": "Vous gagnez de l'argent, mais votre temps libre diminue."
     },
-    {
-        "question": "Votre ami vous invite à une soirée qui coûte 15€ l'entrée. Participez-vous ?",
-        "hint": "Participer à la soirée augmente vos loisirs mais diminue votre budget.",
-        "optionA": {
-            "text": "Aller à la soirée",
-            "effects": {"budget": -15, "loisirs": 10, "epargne": 0},
-            "explanation": "Vous dépensez de l'argent pour vous amuser."
-        },
-        "optionB": {
-            "text": "Rester à la maison",
-            "effects": {"budget": 0, "loisirs": -5, "epargne": 0},
-            "explanation": "Rester chez vous vous fait perdre un peu de plaisir, mais vous économisez de l'argent."
-        }
-    },
-    {
-        "question": "Une offre d'épargne à taux avantageux se présente. Souscrivez-vous ?",
-        "hint": "Investir dans l'épargne peut sécuriser votre avenir financier, même si cela coûte un peu maintenant.",
-        "optionA": {
-            "text": "Souscrire à l'épargne",
-            "effects": {"budget": -5, "loisirs": 0, "epargne": 15},
-            "explanation": "Votre épargne augmente, mais vous devez dépenser une petite somme dès maintenant."
-        },
-        "optionB": {
-            "text": "Ne pas souscrire",
-            "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
-            "explanation": "Vous choisissez de ne pas modifier votre situation financière."
-        }
-    },
-    {
-        "question": "Un projet de rénovation de votre logement se présente et nécessite un financement. Investissez-vous ?",
-        "hint": "Financer un projet peut améliorer votre cadre de vie mais impactera votre budget et votre épargne.",
-        "optionA": {
-            "text": "Investir dans le projet",
-            "effects": {"budget": -10, "loisirs": 0, "epargne": -10},
-            "explanation": "Vous investissez dans votre logement, mais cela réduit à la fois votre budget et votre épargne."
-        },
-        "optionB": {
-            "text": "Reporter le projet",
-            "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
-            "explanation": "Vous choisissez de ne pas investir pour le moment."
-        }
-    },
-    {
-        "question": "Vous avez l'opportunité de partir en voyage, ce qui améliorera vos loisirs, mais cela coûte cher. Le faites-vous ?",
-        "hint": "Un voyage augmente vos loisirs mais diminue fortement votre budget.",
-        "optionA": {
-            "text": "Partir en voyage",
-            "effects": {"budget": -20, "loisirs": 15, "epargne": 0},
-            "explanation": "Vous dépensez beaucoup pour une expérience inoubliable."
-        },
-        "optionB": {
-            "text": "Économiser pour plus tard",
-            "effects": {"budget": 0, "loisirs": -5, "epargne": 10},
-            "explanation": "Vous choisissez d'épargner, sacrifiant temporairement vos loisirs."
-        }
+    "optionB": {
+      "text": "Refuser l'offre",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Votre situation financière reste inchangée, mais votre temps libre reste intact."
     }
+  },
+  {
+    "question": "Une promotion est offerte sur un smartphone dernier cri. L'achetez-vous ?",
+    "hint": "Acheter le smartphone peut améliorer votre quotidien, mais réduira vos économies.",
+    "optionA": {
+      "text": "Acheter le smartphone",
+      "effects": {"budget": -20, "loisirs": 0, "epargne": -10},
+      "explanation": "Vous dépensez une somme importante et réduisez votre épargne."
+    },
+    "optionB": {
+      "text": "Laisser passer l'offre",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Vous décidez d'attendre une meilleure opportunité."
+    }
+  },
+  {
+    "question": "Votre voisin vous propose d'investir dans une start-up prometteuse. Investissez-vous ?",
+    "hint": "L'investissement comporte des risques, mais peut rapporter gros.",
+    "optionA": {
+      "text": "Investir",
+      "effects": {"budget": -10, "loisirs": 0, "epargne": 15},
+      "explanation": "L'investissement peut booster votre épargne, mais comporte un risque important."
+    },
+    "optionB": {
+      "text": "Refuser",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Vous évitez le risque, mais ne profitez pas d'un potentiel gain."
+    }
+  },
+  {
+    "question": "Une réparation imprévue est nécessaire sur votre voiture. Réglez-vous la facture ?",
+    "hint": "La voiture est indispensable, mais la réparation peut peser lourd sur votre budget.",
+    "optionA": {
+      "text": "Payer la réparation",
+      "effects": {"budget": -30, "loisirs": 0, "epargne": -5},
+      "explanation": "La réparation est coûteuse, mais indispensable pour votre mobilité."
+    },
+    "optionB": {
+      "text": "Reporter la réparation",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Reporter la réparation risque d'aggraver la situation à long terme."
+    }
+  },
+  {
+    "question": "Vous envisagez d'acheter un abonnement annuel à une salle de sport. Souscrivez-vous ?",
+    "hint": "L'activité physique est bénéfique, mais l'abonnement a un coût fixe.",
+    "optionA": {
+      "text": "Souscrire à l'abonnement",
+      "effects": {"budget": -15, "loisirs": 5, "epargne": 0},
+      "explanation": "Vous investissez dans votre santé malgré le coût."
+    },
+    "optionB": {
+      "text": "Ne pas souscrire",
+      "effects": {"budget": 0, "loisirs": -5, "epargne": 0},
+      "explanation": "Vous économisez, mais risquez de moins profiter d'activités sportives."
+    }
+  },
+  {
+    "question": "Un ami vous propose de partir en week-end d'aventure à l'étranger. Acceptez-vous ?",
+    "hint": "Ce voyage sera enrichissant mais coûteux.",
+    "optionA": {
+      "text": "Partir en week-end",
+      "effects": {"budget": -25, "loisirs": 20, "epargne": 0},
+      "explanation": "Vous vivez une belle aventure, mais votre budget en prend un coup."
+    },
+    "optionB": {
+      "text": "Rester chez vous",
+      "effects": {"budget": 0, "loisirs": -5, "epargne": 0},
+      "explanation": "Vous économisez, mais ratez une opportunité d'aventure."
+    }
+  },
+  {
+    "question": "Vous trouvez un nouvel appartement plus grand, mais plus cher. Emménagez-vous ?",
+    "hint": "Un nouvel appartement améliore votre qualité de vie, mais augmente vos dépenses.",
+    "optionA": {
+      "text": "Emménager",
+      "effects": {"budget": -40, "loisirs": 0, "epargne": -10},
+      "explanation": "Vous gagnez en confort, mais votre budget est fortement impacté."
+    },
+    "optionB": {
+      "text": "Rester dans l'actuel",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Votre espace de vie reste limité, mais vos finances sont préservées."
+    }
+  },
+  {
+    "question": "Une formation professionnelle vous est proposée pour améliorer vos compétences. La suivez-vous ?",
+    "hint": "Investir en vous-même peut être payant sur le long terme.",
+    "optionA": {
+      "text": "Suivre la formation",
+      "effects": {"budget": -10, "loisirs": -5, "epargne": 0},
+      "explanation": "Vous investissez dans votre développement personnel malgré un impact immédiat sur votre budget."
+    },
+    "optionB": {
+      "text": "Ne pas suivre",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Vous évitez la dépense, mais ratez une opportunité d'amélioration."
+    }
+  },
+  {
+    "question": "Une campagne de publicité vous incite à acheter des vêtements de marque en solde. Achetez-vous ?",
+    "hint": "Les achats impulsifs peuvent nuire à votre gestion financière.",
+    "optionA": {
+      "text": "Acheter",
+      "effects": {"budget": -15, "loisirs": 5, "epargne": -5},
+      "explanation": "Vous profitez des soldes, mais cela affecte négativement vos économies."
+    },
+    "optionB": {
+      "text": "Refuser",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Vous préférez économiser, même si l'offre semble attrayante."
+    }
+  },
+  {
+    "question": "Un ami vous demande de lui prêter une somme importante pour démarrer son entreprise. Prêtez-vous de l'argent ?",
+    "hint": "Prêter de l'argent comporte un risque financier, surtout sans garantie.",
+    "optionA": {
+      "text": "Prêter l'argent",
+      "effects": {"budget": -20, "loisirs": 0, "epargne": -10},
+      "explanation": "Vous aidez votre ami, mais cela peut fragiliser vos finances."
+    },
+    "optionB": {
+      "text": "Refuser",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Vous évitez le risque financier, même si cela peut affecter votre relation."
+    }
+  },
+  {
+    "question": "Vous avez la possibilité de suivre un cours de cuisine pour améliorer vos compétences culinaires. Vous inscrivez-vous ?",
+    "hint": "Le cours peut améliorer votre qualité de vie et vos loisirs.",
+    "optionA": {
+      "text": "S'inscrire au cours",
+      "effects": {"budget": -10, "loisirs": 10, "epargne": 0},
+      "explanation": "Le cours de cuisine enrichit vos loisirs et votre quotidien."
+    },
+    "optionB": {
+      "text": "Ne pas s'inscrire",
+      "effects": {"budget": 0, "loisirs": -5, "epargne": 0},
+      "explanation": "Vous économisez, mais passez à côté d'une expérience enrichissante."
+    }
+  },
+  {
+    "question": "Une offre de crédit à taux avantageux pour financer un projet personnel vous est proposée. Souscrivez-vous ?",
+    "hint": "Le crédit peut vous aider à financer vos projets, mais il comporte des risques.",
+    "optionA": {
+      "text": "Souscrire au crédit",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 10},
+      "explanation": "Le crédit augmente votre capacité d'investissement, mais implique des remboursements futurs."
+    },
+    "optionB": {
+      "text": "Refuser le crédit",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Vous évitez l'endettement, même si cela limite vos projets."
+    }
+  },
+  {
+    "question": "Votre supermarché propose un programme de fidélité avec d'importantes réductions. Adhérez-vous ?",
+    "hint": "Le programme de fidélité peut vous faire économiser sur vos achats quotidiens.",
+    "optionA": {
+      "text": "Adhérer au programme",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 5},
+      "explanation": "Les réductions améliorent votre gestion budgétaire."
+    },
+    "optionB": {
+      "text": "Ne pas adhérer",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Vous ne modifiez pas vos habitudes, mais manquez des économies potentielles."
+    }
+  },
+  {
+    "question": "Un investissement immobilier locatif vous est proposé. Investissez-vous ?",
+    "hint": "L'immobilier peut générer des revenus, mais demande un apport initial important.",
+    "optionA": {
+      "text": "Investir dans l'immobilier",
+      "effects": {"budget": -40, "loisirs": 0, "epargne": 30},
+      "explanation": "L'investissement immobilier peut rapporter sur le long terme, mais réduit votre budget initial."
+    },
+    "optionB": {
+      "text": "Ne pas investir",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Vous évitez un gros investissement, mais manquez une opportunité de revenu."
+    }
+  },
+  {
+    "question": "Une offre de vacances de luxe à tarif réduit vous est proposée. Réservez-vous ?",
+    "hint": "Des vacances de luxe améliorent votre bien-être, mais elles coûtent cher.",
+    "optionA": {
+      "text": "Réserver les vacances",
+      "effects": {"budget": -30, "loisirs": 25, "epargne": -5},
+      "explanation": "Vous vivez une expérience de rêve, mais votre budget en prend un coup."
+    },
+    "optionB": {
+      "text": "Ne pas réserver",
+      "effects": {"budget": 0, "loisirs": -5, "epargne": 0},
+      "explanation": "Vous préférez économiser, même si vous ratez l'occasion d'une expérience luxueuse."
+    }
+  },
+  {
+    "question": "Une pub en ligne vous propose d'investir dans un produit financier garantissant 20% de rendement annuel. Que faites-vous ?",
+    "hint": "Des rendements garantis aussi élevés sont extrêmement rares.",
+    "optionA": {
+      "text": "J'investi toutes mes econnomies !",
+      "effects": {"budget": -20, "loisirs": 0, "epargne": -50},
+      "explanation": "Le produit s'est avéré frauduleux, et vous subissez de lourdes pertes."
+    },
+    "optionB": {
+      "text": "Refuser",
+      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "explanation": "Vous évitez une arnaque potentielle."
+    }
+  }
 ]

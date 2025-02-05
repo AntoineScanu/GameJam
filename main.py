@@ -47,23 +47,50 @@ def center_window(window, width, height):
 
 class SeriousGame(ttk.Window):
     def __init__(self):
-        # Utilisation du thème 'flatly' pour un style moderne
+        # Utilisation du thème 'flatly'
         super().__init__(themename='flatly')
         self.title("Serious Game - Gestion de Patrimoine")
         self.geometry("1200x900")
         self.resizable(False, False)
         center_window(self, 1200, 900)
-        self.configure(bg="#f0f8ff")
+        # Fond principal selon la charte (blanc cassé)
+        self.configure(bg="#fffefd")
 
-        # Dossier assets et chargement du logo (pour le bouton indice)
+        # Configuration globale du style
+        style = ttk.Style()
+        style.theme_use('flatly')
+        # Style général pour TFrame et TLabel
+        style.configure("TFrame", background="#fffefd")
+        style.configure("TLabel", background="#fffefd", foreground="#29373e")
+        # Style pour la carte (jeu)
+        style.configure("Card.TFrame", background="#fffefd", relief="raised", borderwidth=2)
+        style.configure("Question.TLabel", background="#fffefd", foreground="#29373e", font=("Helvetica", 18))
+        # Boutons pour le jeu
+        style.configure("Success.TButton", background="#d8e5ab", foreground="#29373e")
+        style.configure("Primary.TButton", background="#29373e", foreground="#fffefd")
+        style.configure("Info.TButton", background="#7a97b8", foreground="#fffefd")
+        style.configure("Secondary.TButton", background="#7a97b8", foreground="#fffefd")
+        style.configure("Danger.TButton", background="#29373e", foreground="#fffefd")
+
+        # Styles spécifiques pour l'en-tête
+        style.configure("Header.TFrame", background="#7a97b8")
+        style.configure("Header.TLabel", background="#7a97b8", foreground="#fffefd", font=("Helvetica", 20, "bold"))
+
+        # Styles pour le quiz (nous créons un style dédié)
+        style.configure("Quiz.TFrame", background="#fffefd")
+        style.configure("Quiz.TLabel", background="#fffefd", foreground="#29373e", font=("Helvetica", 18))
+        style.configure("Quiz.TRadiobutton", background="#fffefd", foreground="#29373e", font=("Helvetica", 14))
+        style.configure("Quiz.TButton", background="#29373e", foreground="#fffefd")
+
+        # Dossier assets et chargement du logo
         self.assets_dir = os.path.join(os.path.dirname(__file__), "assets")
         logo_path = os.path.join(self.assets_dir, "logo.png")
         self.logo_photo = load_image_from_file(logo_path, (40, 40))
 
-        # Dossier des images de personnage
+        # Dossier images de personnage
         self.character_dir = os.path.join(self.assets_dir, "character")
 
-        # État initial du jeu
+        # État initial
         self.gauges = {"budget": 50, "loisirs": 50, "epargne": 50}
         self.game_log = []
         self.checkpoint_state = None
@@ -76,7 +103,6 @@ class SeriousGame(ttk.Window):
         except Exception as e:
             messagebox.showerror("Erreur", f"Impossible de charger cards.json: {e}")
             self.destroy()
-
         try:
             with open("quiz.json", "r", encoding="utf-8") as f:
                 self.quiz_questions = json.load(f)
@@ -84,49 +110,50 @@ class SeriousGame(ttk.Window):
             messagebox.showerror("Erreur", f"Impossible de charger quiz.json: {e}")
             self.destroy()
 
-        # Conteneur principal pour les frames (centré)
+        # Conteneur principal
         self.container = ttk.Frame(self)
         self.container.pack(expand=True)
 
-        # Création des frames de jeu et de quiz
+        # Création des frames (jeu et quiz)
         self.frames = {}
         for F in (GameFrame, QuizFrame):
             frame = F(parent=self.container, controller=self)
             self.frames[F.__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        # En-tête (titre du jeu)
-        self.header_frame = ttk.Frame(self, bootstyle="info")
+        # En-tête avec style personnalisé
+        self.header_frame = ttk.Frame(self, style="Header.TFrame")
         self.header_frame.pack(side="top", fill="x")
-        header_label = ttk.Label(self.header_frame, text="Serious Game - Gestion de Patrimoine", font=("Helvetica", 20, "bold"))
+        header_label = ttk.Label(self.header_frame, text="Serious Game - Gestion de Patrimoine", style="Header.TLabel")
         header_label.pack(pady=10)
 
-        # Label d'instructions pour les raccourcis clavier
-        self.shortcuts_label = ttk.Label(self, text="Raccourcis: Pour le jeu → ← pour choisir, Entrée ou flèche pour passer; Pour le quiz ↑/↓ pour naviguer, Entrée pour valider", font=("Helvetica", 12))
+        # Label d'instructions pour les raccourcis
+        self.shortcuts_label = ttk.Label(
+            self,
+            text="Raccourcis : Dans le jeu →/← pour choisir/passer, Entrée ou flèche pour passer; Dans le quiz ↑/↓ pour naviguer, Entrée pour valider; 'i' pour indice",
+            font=("Helvetica", 12)
+        )
+        self.shortcuts_label.configure(background="#fffefd", foreground="#29373e")
         self.shortcuts_label.pack(side="bottom", pady=5)
 
-        # Lier les touches fléchées et Entrée (pour la partie jeu)
+        # Bindings pour le jeu et la touche indice ('i')
         self.bind("<Left>", self.on_left_arrow)
         self.bind("<Right>", self.on_right_arrow)
         self.bind("<Return>", self.on_enter_key)
+        self.bind("<i>", self.on_i_key)
 
-        # Démarrage sur la frame de jeu
         self.show_frame("GameFrame")
         self.load_next_card()
 
     def on_left_arrow(self, event):
-        # Pour la partie jeu, si la frame de jeu est visible
         game_frame = self.frames["GameFrame"]
         if game_frame.winfo_ismapped():
-            # Si le bouton "Suivant" est activé, passer à la question suivante
             if "disabled" not in game_frame.next_button.state():
                 game_frame.next_card()
-            # Sinon, sélectionner l'option A
             elif "disabled" not in game_frame.optionA_button.state():
                 game_frame.choice("A")
 
     def on_right_arrow(self, event):
-        # Pour la partie jeu, idem pour l'option B
         game_frame = self.frames["GameFrame"]
         if game_frame.winfo_ismapped():
             if "disabled" not in game_frame.next_button.state():
@@ -135,17 +162,18 @@ class SeriousGame(ttk.Window):
                 game_frame.choice("B")
 
     def on_enter_key(self, event):
-        # Dans la partie jeu, si le bouton "Suivant" est activé, passer à la question suivante
         if self.frames["GameFrame"].winfo_ismapped():
             if "disabled" not in self.frames["GameFrame"].next_button.state():
                 self.frames["GameFrame"].next_card()
-        # Dans le quiz, la touche Entrée valide la réponse (le quiz gère ses propres flèches)
         elif self.frames["QuizFrame"].winfo_ismapped():
             self.frames["QuizFrame"].submit_answer()
 
+    def on_i_key(self, event):
+        if self.frames["GameFrame"].winfo_ismapped():
+            self.frames["GameFrame"].show_indice()
+
     def show_frame(self, frame_name):
-        frame = self.frames[frame_name]
-        frame.tkraise()
+        self.frames[frame_name].tkraise()
 
     def update_gauges_display(self):
         gauges_text = f"Budget: {self.gauges['budget']} | Loisirs: {self.gauges['loisirs']} | Épargne: {self.gauges['epargne']}"
@@ -220,11 +248,9 @@ class SeriousGame(ttk.Window):
 
 class GameFrame(ttk.Frame):
     def __init__(self, parent, controller):
-        # Style pour la carte
         style = ttk.Style()
-        style.configure("Card.TFrame", background="white", relief="raised", borderwidth=2)
-        # Style pour le label de la question
-        style.configure("Question.TLabel", background="white", foreground="black", font=("Helvetica", 18))
+        style.configure("Card.TFrame", background="#fffefd", relief="raised", borderwidth=2)
+        style.configure("Question.TLabel", background="#fffefd", foreground="#29373e", font=("Helvetica", 18))
         super().__init__(parent, style="Card.TFrame")
         self.controller = controller
 
@@ -240,13 +266,12 @@ class GameFrame(ttk.Frame):
         self.question_label = ttk.Label(self.card_frame, text="", wraplength=500, style="Question.TLabel")
         self.question_label.pack(side="left", padx=10, pady=10)
 
-        self.explanation_label = ttk.Label(self, text="", wraplength=700, font=("Helvetica", 14, "italic"), foreground="blue")
+        self.explanation_label = ttk.Label(self, text="", wraplength=700, font=("Helvetica", 14, "italic"), foreground="#29373e")
         self.explanation_label.pack(pady=10)
 
         self.buttons_frame = ttk.Frame(self)
         self.buttons_frame.pack(pady=10)
 
-        # Pour l'option A, la flèche gauche précède le texte
         self.optionA_button = ttk.Button(
             self.buttons_frame,
             text="",
@@ -255,7 +280,6 @@ class GameFrame(ttk.Frame):
             bootstyle="success"
         )
         self.optionA_button.grid(row=0, column=0, padx=20, pady=10)
-        # Pour l'option B, le texte est suivi de la flèche droite
         self.optionB_button = ttk.Button(
             self.buttons_frame,
             text="",
@@ -317,37 +341,40 @@ class GameFrame(ttk.Frame):
 
 class QuizFrame(ttk.Frame):
     def __init__(self, parent, controller):
-        super().__init__(parent, bootstyle="warning")
+        # Utilisation du style personnalisé "Quiz.TFrame"
+        super().__init__(parent, style="Quiz.TFrame")
         self.controller = controller
         self.var_answer = tk.StringVar()
 
-        self.title_label = ttk.Label(self, text="Quiz Éducatif", font=("Helvetica", 20, "bold"))
+        self.title_label = ttk.Label(self, text="Quiz Éducatif", style="Quiz.TLabel")
         self.title_label.pack(pady=20)
 
-        self.question_label = ttk.Label(self, text="", wraplength=700, font=("Helvetica", 18))
+        self.question_label = ttk.Label(self, text="", wraplength=700, style="Quiz.TLabel")
         self.question_label.pack(pady=20)
 
-        self.options_frame = ttk.Frame(self)
+        self.options_frame = ttk.Frame(self, style="Quiz.TFrame")
         self.options_frame.pack(pady=10)
 
         self.radio_buttons = {}
         for option in ["A", "B", "C", "D"]:
-            rb = ttk.Radiobutton(self.options_frame, text="", variable=self.var_answer, value=option, bootstyle="success")
+            rb = ttk.Radiobutton(self.options_frame, text="", variable=self.var_answer, value=option, style="Quiz.TRadiobutton")
             rb.pack(anchor="w", padx=20, pady=5)
             self.radio_buttons[option] = rb
 
-        self.submit_button = ttk.Button(self, text="Valider", command=self.submit_answer, bootstyle="primary")
+        self.submit_button = ttk.Button(self, text="Valider", command=self.submit_answer, style="Quiz.TButton")
         self.submit_button.pack(pady=20)
 
-        self.quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, bootstyle="secondary")
+        self.quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, style="Quiz.TButton")
         self.quit_button.pack(pady=10)
 
-        # Bindings pour naviguer avec les flèches dans le quiz
+        # Bindings pour naviguer dans le quiz
+        self.bind("<Return>", lambda event: self.submit_answer())
         self.bind("<Up>", self.on_up_arrow)
         self.bind("<Down>", self.on_down_arrow)
+        self.focus_set()
 
     def load_question(self, question):
-        self.focus_set()  # Assure que la frame capte les événements clavier
+        self.focus_set()  # S'assurer que la frame capte les événements clavier
         self.current_question = question
         self.question_label.config(text=question.get("question", "Question non définie"))
         self.var_answer.set("")

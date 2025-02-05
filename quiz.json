@@ -1,102 +1,152 @@
 [
-    {
-        "question": "Qu'est-ce qu'un budget ?",
-        "options": {
-            "A": "Un document qui détaille vos revenus et vos dépenses",
-            "B": "Une liste de souhaits",
-            "C": "Un calcul des impôts",
-            "D": "Un plan de carrière"
-        },
-        "answer": "A"
+  {
+    "question": "Qu'est-ce qu'un budget ?",
+    "options": {
+      "A": "Un document détaillant vos revenus et dépenses",
+      "B": "Un plan de carrière",
+      "C": "Une liste d'achats",
+      "D": "Un compte d'épargne"
     },
-    {
-        "question": "Que représente l'épargne ?",
-        "options": {
-            "A": "De l'argent dépensé",
-            "B": "De l'argent mis de côté",
-            "C": "De l'argent emprunté",
-            "D": "De l'argent perdu"
-        },
-        "answer": "B"
+    "answer": "A"
+  },
+  {
+    "question": "Qu'est-ce que l'épargne ?",
+    "options": {
+      "A": "Argent dépensé",
+      "B": "Argent mis de côté pour l'avenir",
+      "C": "Argent emprunté",
+      "D": "Argent investi"
     },
-    {
-        "question": "Le crédit consiste à :",
-        "options": {
-            "A": "Prêter de l'argent à quelqu'un",
-            "B": "Emprunter de l'argent",
-            "C": "Épargner de l'argent",
-            "D": "Gagner de l'argent"
-        },
-        "answer": "B"
+    "answer": "B"
+  },
+  {
+    "question": "Quelle est la fonction principale d'un budget ?",
+    "options": {
+      "A": "Déterminer combien vous pouvez dépenser",
+      "B": "Déterminer vos revenus",
+      "C": "Calculer vos impôts",
+      "D": "Planifier vos loisirs"
     },
-    {
-        "question": "Pourquoi est-il important de gérer son budget ?",
-        "options": {
-            "A": "Pour éviter les dettes et anticiper ses dépenses",
-            "B": "Pour pouvoir tout acheter",
-            "C": "Pour dépenser sans réfléchir",
-            "D": "Pour ignorer ses finances"
-        },
-        "answer": "A"
+    "answer": "A"
+  },
+  {
+    "question": "Qu'est-ce qu'un crédit responsable ?",
+    "options": {
+      "A": "Emprunter sans capacité de remboursement",
+      "B": "Emprunter en fonction de vos revenus",
+      "C": "Emprunter pour des achats impulsifs",
+      "D": "Aucune des réponses"
     },
-    {
-        "question": "Que signifie la consommation responsable ?",
-        "options": {
-            "A": "Acheter sans se soucier du prix",
-            "B": "Acheter en fonction de ses besoins réels",
-            "C": "Acheter uniquement de la nourriture",
-            "D": "Acheter tout ce qui est en solde"
-        },
-        "answer": "B"
+    "answer": "B"
+  },
+  {
+    "question": "Pourquoi est-il important d'avoir un fonds d'urgence ?",
+    "options": {
+      "A": "Pour faire face aux imprévus financiers",
+      "B": "Pour investir dans l'immobilier",
+      "C": "Pour payer des vacances",
+      "D": "Pour acheter des biens de luxe"
     },
-    {
-        "question": "Comment augmenter son épargne ?",
-        "options": {
-            "A": "En dépensant plus",
-            "B": "En économisant une partie de ses revenus",
-            "C": "En empruntant de l'argent",
-            "D": "En dépensant pour des loisirs"
-        },
-        "answer": "B"
+    "answer": "A"
+  },
+  {
+    "question": "Quelle est la principale différence entre épargne et investissement ?",
+    "options": {
+      "A": "L'épargne est généralement plus sécurisée, tandis que l'investissement comporte des risques",
+      "B": "L'investissement est sans risque",
+      "C": "L'épargne rapporte plus d'intérêts que l'investissement",
+      "D": "Il n'y a aucune différence"
     },
-    {
-        "question": "Pour une bonne gestion financière, il est important de :",
-        "options": {
-            "A": "Prioriser les dépenses essentielles et l'épargne",
-            "B": "Dépenser pour des loisirs coûteux",
-            "C": "Souscrire à tous les crédits",
-            "D": "Avoir des achats impulsifs"
-        },
-        "answer": "A"
+    "answer": "A"
+  },
+  {
+    "question": "Qu'est-ce que la consommation responsable ?",
+    "options": {
+      "A": "Acheter impulsivement sans réfléchir",
+      "B": "Acheter en fonction de ses besoins et de son budget",
+      "C": "Acheter uniquement des produits de luxe",
+      "D": "Ignorer la qualité des produits"
     },
-    {
-        "question": "Quel est l'avantage d'un revenu régulier ?",
-        "options": {
-            "A": "Il permet de mieux planifier ses dépenses",
-            "B": "Il permet d'acheter des biens de luxe",
-            "C": "Il n'a aucun avantage",
-            "D": "Il permet de dépenser sans compter"
-        },
-        "answer": "A"
+    "answer": "B"
+  },
+  {
+    "question": "Pourquoi est-il crucial de suivre régulièrement ses finances ?",
+    "options": {
+      "A": "Pour éviter le surendettement et anticiper les imprévus",
+      "B": "Pour dépenser plus",
+      "C": "Pour emprunter davantage",
+      "D": "Pour ignorer les dépenses"
     },
-    {
-        "question": "Qu'est-ce qu'un crédit responsable ?",
-        "options": {
-            "A": "Emprunter sans plan de remboursement",
-            "B": "Emprunter en fonction de ses capacités de remboursement",
-            "C": "Emprunter pour acheter des biens inutiles",
-            "D": "Emprunter sans intérêt"
-        },
-        "answer": "B"
+    "answer": "A"
+  },
+  {
+    "question": "Que signifie 'taux d'intérêt' ?",
+    "options": {
+      "A": "Le pourcentage d'argent gagné ou dû sur un capital",
+      "B": "Le montant total emprunté",
+      "C": "Le nombre de crédits souscrits",
+      "D": "Une taxe sur le revenu"
     },
-    {
-        "question": "Pourquoi est-il important de distinguer revenus et dépenses ?",
-        "options": {
-            "A": "Pour savoir combien d'argent il vous reste",
-            "B": "Pour dépenser tout votre argent",
-            "C": "Pour ignorer vos finances",
-            "D": "Pour emprunter davantage"
-        },
-        "answer": "A"
-    }
+    "answer": "A"
+  },
+  {
+    "question": "Quel est l'avantage d'une consommation planifiée ?",
+    "options": {
+      "A": "Réduire le gaspillage et optimiser ses dépenses",
+      "B": "Augmenter les achats impulsifs",
+      "C": "Ignorer son budget",
+      "D": "Augmenter ses dettes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Comment peut-on améliorer sa gestion financière ?",
+    "options": {
+      "A": "En élaborant et en suivant un budget",
+      "B": "En dépensant sans compter",
+      "C": "En empruntant systématiquement",
+      "D": "En ne surveillant pas ses dépenses"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Qu'est-ce qu'un crédit à taux fixe ?",
+    "options": {
+      "A": "Un crédit dont le taux d'intérêt reste constant pendant toute la durée du prêt",
+      "B": "Un crédit dont le taux d'intérêt varie selon le marché",
+      "C": "Un crédit sans intérêt",
+      "D": "Un crédit remboursable en une seule fois"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Pourquoi est-il important d'investir son argent ?",
+    "options": {
+      "A": "Pour faire fructifier ses économies sur le long terme",
+      "B": "Pour tout dépenser rapidement",
+      "C": "Pour augmenter ses dettes",
+      "D": "Pour ignorer la gestion de son budget"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Que signifie diversifier ses investissements ?",
+    "options": {
+      "A": "Investir dans différents secteurs pour réduire les risques",
+      "B": "Investir dans une seule entreprise",
+      "C": "Mettre tout son argent dans l'épargne",
+      "D": "Ne pas investir du tout"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Pourquoi est-il recommandé de comparer les offres financières ?",
+    "options": {
+      "A": "Pour trouver l'option la plus avantageuse et économiser de l'argent",
+      "B": "Pour choisir au hasard",
+      "C": "Pour payer plus cher",
+      "D": "Pour ignorer les différences"
+    },
+    "answer": "A"
+  }
 ]
