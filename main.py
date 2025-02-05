@@ -270,7 +270,7 @@ class MenuFrame(ttk.Frame):
         play_button = ttk.Button(self, text="Jouer", command=self.start_game, bootstyle="Primary")
         play_button.pack(pady=10, ipadx=10, ipady=5)
         # Bouton Quitter
-        quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, bootstyle="Secondary")
+        quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, bootstyle="Primary")
         quit_button.pack(pady=10, ipadx=10, ipady=5)
 
     def start_game(self):
@@ -370,7 +370,7 @@ class GameFrame(ttk.Frame):
                                        width=30, bootstyle="primary")
         self.next_button.pack(pady=10)
 
-        self.quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, bootstyle="secondary")
+        self.quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, bootstyle="Primary")
         self.quit_button.pack(pady=10)
 
     def update_gauges_label(self, budget, bonheur, epargne):
