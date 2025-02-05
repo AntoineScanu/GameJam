@@ -222,5 +222,286 @@
       "effects": {"budget": 0, "bonheur": 10, "epargne": 0},
       "explanation": "Vous évitez une arnaque potentielle."
     }
+  },
+  {
+    "question": "Votre ordinateur commence à ralentir et vous envisagez d'en acheter un nouveau. Passez-vous à l'achat ?",
+    "hint": "Acheter un nouvel ordinateur peut améliorer votre productivité, mais c'est une grosse dépense.",
+    "optionA": {
+      "text": "Acheter un nouvel ordinateur",
+      "effects": {"budget": -20, "bonheur": 10, "epargne": -30},
+      "explanation": "Votre productivité s'améliore, mais votre épargne en souffre."
+    },
+    "optionB": {
+      "text": "Conserver l'ancien ordinateur",
+      "effects": {"budget": 0, "bonheur": -5, "epargne": 0},
+      "explanation": "Vous économisez de l'argent, mais devez composer avec un appareil lent."
+    }
+  },
+  {
+    "question": "Vous tombez malade et hésitez à consulter un médecin. Allez-vous chez le médecin ?",
+    "hint": "Consulter un médecin améliore votre santé mais représente une dépense.",
+    "optionA": {
+      "text": "Aller chez le médecin",
+      "effects": {"budget": -10, "bonheur": 5, "epargne": -10},
+      "explanation": "Vous prenez soin de votre santé, mais cela vous coûte de l'argent."
+    },
+    "optionB": {
+      "text": "Ne pas consulter",
+      "effects": {"budget": 0, "bonheur": -30, "epargne": 0},
+      "explanation": "Vous économisez de l'argent, mais votre état pourrait s'aggraver."
+    }
+  },
+  {
+    "question": "Vous voyez une offre pour un abonnement de streaming. Vous abonnez-vous ?",
+    "hint": "Un abonnement permet d'accéder à des divertissements, mais c'est une dépense mensuelle.",
+    "optionA": {
+      "text": "S'abonner",
+      "effects": {"budget": -10, "bonheur": 10, "epargne": -5},
+      "explanation": "Vous profitez de contenus illimités, mais dépensez régulièrement."
+    },
+    "optionB": {
+      "text": "Ne pas s'abonner",
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
+      "explanation": "Vous économisez de l'argent, mais manquez des divertissements."
+    }
+  },
+  {
+    "question": "Vous envisagez d'adopter un animal de compagnie. Passez-vous à l'acte ?",
+    "hint": "Un animal apporte du bonheur, mais nécessite du temps et de l'argent.",
+    "optionA": {
+      "text": "Adopter un animal",
+      "effects": {"budget": -40, "bonheur": 20, "epargne": -20},
+      "explanation": "Vous gagnez un compagnon fidèle, mais votre budget en pâtit."
+    },
+    "optionB": {
+      "text": "Ne pas adopter",
+      "effects": {"budget": 0, "bonheur": -10, "epargne": 0},
+      "explanation": "Vous évitez les frais et les responsabilités, mais perdez une source de bonheur."
+    }
+  },
+  {
+    "question": "Votre patron vous propose de faire des heures supplémentaires cette semaine. Acceptez-vous ?",
+    "hint": "Les heures supplémentaires augmentent votre revenu, mais réduisent votre temps libre.",
+    "optionA": {
+      "text": "Accepter les heures supplémentaires",
+      "effects": {"budget": 20, "bonheur": -5, "epargne": 10},
+      "explanation": "Vous gagnez plus d'argent, mais êtes plus fatigué et avez moins de temps pour vous."
+    },
+    "optionB": {
+      "text": "Refuser les heures supplémentaires",
+      "effects": {"budget": 0, "bonheur": 5, "epargne": 0},
+      "explanation": "Vous conservez votre temps libre, mais votre revenu ne change pas."
+    }
+  },
+  {
+    "question": "Votre vélo est volé et vous devez trouver une solution pour vos trajets. Que faites-vous ?",
+    "hint": "Remplacer votre vélo peut être coûteux, mais vous facilite vos déplacements.",
+    "optionA": {
+      "text": "Acheter un nouveau vélo",
+      "effects": {"budget": -40, "bonheur": 10, "epargne": -20},
+      "explanation": "Vous retrouvez votre autonomie, mais faites une grosse dépense."
+    },
+    "optionB": {
+      "text": "Utiliser les transports en commun",
+      "effects": {"budget": -10, "bonheur": -5, "epargne": -5},
+      "explanation": "Vous dépendez des transports publics, ce qui peut être moins pratique."
+    }
+  },
+  {
+    "question": "Vous trouvez un portefeuille dans la rue. Que faites-vous ?",
+    "hint": "Rendre le portefeuille est moralement bien, mais ne vous rapporte rien financièrement.",
+    "optionA": {
+      "text": "Le rapporter au commissariat",
+      "effects": {"budget": 0, "bonheur": 10, "epargne": 0},
+      "explanation": "Vous faites une bonne action qui vous rend fier."
+    },
+    "optionB": {
+      "text": "Le garder pour vous",
+      "effects": {"budget": 20, "bonheur": -15, "epargne": 10},
+      "explanation": "Vous gagnez de l'argent, mais vous ressentez de la culpabilité."
+    }
+  },
+  {
+    "question": "Vous cassez accidentellement un objet dans un magasin. Payez-vous les dégâts ?",
+    "hint": "Payer est une question d'honnêteté, mais cela affecte votre budget.",
+    "optionA": {
+      "text": "Payer les dégâts",
+      "effects": {"budget": -20, "bonheur": 10, "epargne": -10},
+      "explanation": "Vous agissez honnêtement, mais votre budget en pâtit."
+    },
+    "optionB": {
+      "text": "Ne pas signaler l'incident",
+      "effects": {"budget": 0, "bonheur": -10, "epargne": 0},
+      "explanation": "Vous évitez une dépense mais ressentez de la culpabilité."
+    }
+  },
+   {
+    "question": "Un proche vous propose de devenir colocataire pour partager les frais. Acceptez-vous ?",
+    "hint": "Vivre en colocation réduit vos coûts mais demande des compromis.",
+    "optionA": {
+      "text": "Accepter la colocation",
+      "effects": {"budget": 30, "bonheur": -15, "epargne": 20},
+      "explanation": "Vous économisez de l'argent, mais devez vous adapter à la vie en communauté."
+    },
+    "optionB": {
+      "text": "Rester seul",
+      "effects": {"budget": 0, "bonheur": 15, "epargne": 0},
+      "explanation": "Vous conservez votre indépendance mais continuez à payer plus cher."
+    }
+  },
+  {
+    "question": "Vous gagnez une petite somme d'argent inattendue. Que faites-vous ?",
+    "hint": "Vous pouvez choisir entre économiser ou vous faire plaisir.",
+    "optionA": {
+      "text": "Épargner l'argent",
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 20},
+      "explanation": "Vous sécurisez votre avenir mais ne profitez pas immédiatement de cet argent."
+    },
+    "optionB": {
+      "text": "Dépenser pour vous faire plaisir",
+      "effects": {"budget": 0, "bonheur": 20, "epargne": 0},
+      "explanation": "Vous vous offrez un plaisir immédiat mais sans impact positif sur votre épargne."
+    }
+  },
+  {
+    "question": "Un proche fête son anniversaire et vous invite à une soirée coûteuse. Y allez-vous ?",
+    "hint": "Participer renforce vos liens sociaux, mais impacte votre budget.",
+    "optionA": {
+      "text": "Aller à la soirée",
+      "effects": {"budget": -30, "bonheur": 10, "epargne": -15},
+      "explanation": "Vous passez un bon moment, mais votre budget en prend un coup."
+    },
+    "optionB": {
+      "text": "Ne pas y aller",
+      "effects": {"budget": 0, "bonheur": -5, "epargne": 0},
+      "explanation": "Vous économisez de l'argent, mais ratez un moment convivial."
+    }
+  },
+  {
+    "question": "Vous voyez une offre pour une assurance santé plus complète mais plus chère. L'acceptez-vous ?",
+    "hint": "Une meilleure assurance protège mieux, mais coûte plus cher.",
+    "optionA": {
+      "text": "Souscrire à l’assurance",
+      "effects": {"budget": -20, "bonheur": 15, "epargne": -10},
+      "explanation": "Vous êtes mieux protégé, mais votre budget est réduit."
+    },
+    "optionB": {
+      "text": "Garder votre assurance actuelle",
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
+      "explanation": "Vous économisez de l'argent, mais prenez un risque en cas de problème de santé."
+    }
+  },
+  {
+    "question": "Vous recevez une prime exceptionnelle de votre employeur. Que faites-vous ?",
+    "hint": "Vous pouvez en profiter immédiatement ou sécuriser votre avenir.",
+    "optionA": {
+      "text": "Épargner la prime",
+      "effects": {"budget": 0, "bonheur": 5, "epargne": 30},
+      "explanation": "Vous sécurisez votre avenir et évitez des dépenses impulsives."
+    },
+    "optionB": {
+      "text": "Vous offrir un beau cadeau",
+      "effects": {"budget": 0, "bonheur": 20, "epargne": 0},
+      "explanation": "Vous profitez du moment présent en vous faisant plaisir."
+    }
+  },
+  {
+    "question": "Votre entreprise propose une formation gratuite pour évoluer professionnellement. Acceptez-vous ?",
+    "hint": "Se former peut améliorer vos perspectives de carrière.",
+    "optionA": {
+      "text": "Accepter la formation",
+      "effects": {"budget": 0, "bonheur": 10, "epargne": 0},
+      "explanation": "Vous développez vos compétences sans frais et augmentez vos chances d’évolution."
+    },
+    "optionB": {
+      "text": "Refuser la formation",
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
+      "explanation": "Vous ne changez rien à votre situation actuelle."
+    }
+  },
+  {
+    "question": "Vous gagnez un abonnement gratuit à une salle de sport pendant six mois. Que faites-vous ?",
+    "hint": "L’exercice physique peut améliorer votre santé et votre moral.",
+    "optionA": {
+      "text": "Profiter de l’abonnement",
+      "effects": {"budget": 0, "bonheur": 15, "epargne": 0},
+      "explanation": "Vous améliorez votre santé et votre bien-être gratuitement."
+    },
+    "optionB": {
+      "text": "Ne pas en profiter",
+      "effects": {"budget": 0, "bonheur": -5, "epargne": 0},
+      "explanation": "Vous ratez une opportunité d’améliorer votre condition physique."
+    }
+  },
+  {
+    "question": "Vous trouvez une offre d’emploi mieux payée avec des conditions similaires. Acceptez-vous ?",
+    "hint": "Changer d’emploi peut améliorer vos finances.",
+    "optionA": {
+      "text": "Accepter le nouvel emploi",
+      "effects": {"budget": 40, "bonheur": 10, "epargne": 20},
+      "explanation": "Vous gagnez plus d’argent sans perdre en qualité de vie."
+    },
+    "optionB": {
+      "text": "Rester dans votre emploi actuel",
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
+      "explanation": "Vous restez dans une situation stable mais ratez une opportunité d’augmentation."
+    }
+  },
+  {
+    "question": "Vous recevez une amende pour excès de vitesse. Comment réagissez-vous ?",
+    "hint": "Payer immédiatement ou contester peut avoir des conséquences différentes.",
+    "optionA": {
+      "text": "Payer immédiatement",
+      "effects": {"budget": -30, "bonheur": -10, "epargne": -20},
+      "explanation": "Vous perdez de l’argent mais évitez des complications."
+    },
+    "optionB": {
+      "text": "Contester l’amende",
+      "effects": {"budget": -10, "bonheur": -15, "epargne": -5},
+      "explanation": "Vous engagez des démarches stressantes avec une chance de ne pas payer."
+    }
+  },
+  {
+    "question": "Vous perdez votre emploi de manière inattendue. Que faites-vous ?",
+    "hint": "Il vous faut rapidement une solution financière.",
+    "optionA": {
+      "text": "Utiliser vos économies",
+      "effects": {"budget": 0, "bonheur": -15, "epargne": -50},
+      "explanation": "Vous couvrez vos dépenses mais votre épargne fond."
+    },
+    "optionB": {
+      "text": "Chercher un emploi en urgence",
+      "effects": {"budget": 0, "bonheur": -10, "epargne": 0},
+      "explanation": "Vous conservez votre épargne mais subissez beaucoup de stress."
+    }
+  },
+  {
+    "question": "Un problème de plomberie inonde votre appartement. Que faites-vous ?",
+    "hint": "Les réparations sont coûteuses mais nécessaires.",
+    "optionA": {
+      "text": "Faire appel à un professionnel",
+      "effects": {"budget": -60, "bonheur": -5, "epargne": -40},
+      "explanation": "Le problème est résolu mais vous perdez beaucoup d’argent."
+    },
+    "optionB": {
+      "text": "Essayer de réparer vous-même",
+      "effects": {"budget": -10, "bonheur": -10, "epargne": -5},
+      "explanation": "Vous économisez de l’argent mais risquez d’aggraver la situation."
+    }
+  },
+  {
+    "question": "Vous découvrez une erreur sur votre fiche de paie, et votre salaire est plus bas que prévu. Que faites-vous ?",
+    "hint": "Régler le problème peut prendre du temps.",
+    "optionA": {
+      "text": "Signaler immédiatement",
+      "effects": {"budget": 0, "bonheur": -5, "epargne": 0},
+      "explanation": "Vous essayez de récupérer votre dû mais cela prend du temps."
+    },
+    "optionB": {
+      "text": "Ignorer et faire avec",
+      "effects": {"budget": -30, "bonheur": -10, "epargne": -20},
+      "explanation": "Vous perdez de l’argent sans chercher à résoudre le problème."
+    }
   }
+
 ]

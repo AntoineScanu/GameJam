@@ -85,7 +85,7 @@ class SeriousGame(ttk.Window):
         self.epargne_icon = load_image_from_file(os.path.join(self.assets_dir, "epargne.png"), (30, 30))
         self.character_dir = os.path.join(self.assets_dir, "character")
 
-        # Modification des jauges (remplacement de "loisirs" par "bonheur")
+        # Modification des jauges
         self.gauges = {"budget": 50, "bonheur": 50, "epargne": 50}
         self.game_log = []
         self.checkpoint_state = None
