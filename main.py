@@ -1,22 +1,75 @@
+import os
+import random
+import json
 import tkinter as tk
 from tkinter import messagebox
-import json
-import random
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
+from PIL import Image, ImageTk
 
+def load_image_from_file(path, size):
+    """
+    Charge une image depuis un fichier, la redimensionne et renvoie un objet PhotoImage.
+    """
+    try:
+        image = Image.open(path)
+        image = image.resize(size, resample=Image.LANCZOS)
+        return ImageTk.PhotoImage(image)
+    except Exception as e:
+        print(f"Erreur lors du chargement de l'image depuis {path}: {e}")
+        return None
 
-class SeriousGame(tk.Tk):
+def get_random_character_image(character_dir, size):
+    """
+    Parcourt le dossier 'character' et renvoie une image (PhotoImage) choisie aléatoirement.
+    """
+    try:
+        files = [f for f in os.listdir(character_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))]
+        if not files:
+            return None
+        chosen_file = random.choice(files)
+        path = os.path.join(character_dir, chosen_file)
+        return load_image_from_file(path, size)
+    except Exception as e:
+        print(f"Erreur lors de la sélection d'une image de personnage: {e}")
+        return None
+
+def center_window(window, width, height):
+    """
+    Centre la fenêtre sur l'écran en utilisant les dimensions passées.
+    """
+    window.update_idletasks()
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+    window.geometry(f"{width}x{height}+{x}+{y}")
+
+class SeriousGame(ttk.Window):
     def __init__(self):
-        super().__init__()
+        # Utilisation du thème 'flatly' pour un style moderne
+        super().__init__(themename='flatly')
         self.title("Serious Game - Gestion de Patrimoine")
-        self.geometry("800x600")
+        self.geometry("1200x900")
+        self.resizable(False, False)
+        center_window(self, 1200, 900)
+        self.configure(bg="#f0f8ff")
 
-        # État du jeu
+        # Dossier assets et chargement du logo (pour le bouton indice)
+        self.assets_dir = os.path.join(os.path.dirname(__file__), "assets")
+        logo_path = os.path.join(self.assets_dir, "logo.png")
+        self.logo_photo = load_image_from_file(logo_path, (40, 40))
+
+        # Dossier des images de personnage
+        self.character_dir = os.path.join(self.assets_dir, "character")
+
+        # État initial du jeu
         self.gauges = {"budget": 50, "loisirs": 50, "epargne": 50}
         self.game_log = []
         self.checkpoint_state = None
         self.checkpoint_log_index = None
 
-        # Chargement des fichiers JSON
+        # Chargement des données JSON
         try:
             with open("cards.json", "r", encoding="utf-8") as f:
                 self.cards = json.load(f)
@@ -31,32 +84,62 @@ class SeriousGame(tk.Tk):
             messagebox.showerror("Erreur", f"Impossible de charger quiz.json: {e}")
             self.destroy()
 
-        # Création d'un conteneur pour les frames
-        self.container = tk.Frame(self)
-        self.container.pack(fill="both", expand=True)
+        # Conteneur principal pour les frames (centré)
+        self.container = ttk.Frame(self)
+        self.container.pack(expand=True)
 
-        # Dictionnaire pour stocker les frames (Game et Quiz)
+        # Création des frames de jeu et de quiz
         self.frames = {}
         for F in (GameFrame, QuizFrame):
             frame = F(parent=self.container, controller=self)
             self.frames[F.__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        # On démarre sur le GameFrame
+        # En-tête (titre du jeu)
+        self.header_frame = ttk.Frame(self, bootstyle="info")
+        self.header_frame.pack(side="top", fill="x")
+        header_label = ttk.Label(self.header_frame, text="Serious Game - Gestion de Patrimoine", font=("Helvetica", 20, "bold"))
+        header_label.pack(pady=10)
+
+        # Label d'instructions pour les raccourcis clavier
+        self.shortcuts_label = ttk.Label(self, text="Raccourcis: ← = Option A | → = Option B | Entrée = Suivant/Valider", font=("Helvetica", 12))
+        self.shortcuts_label.pack(side="bottom", pady=5)
+
+        # Lier les touches fléchées et Entrée
+        self.bind("<Left>", self.on_left_arrow)
+        self.bind("<Right>", self.on_right_arrow)
+        self.bind("<Return>", self.on_enter_key)
+
+        # Démarrage sur la frame de jeu
         self.show_frame("GameFrame")
         self.load_next_card()
+
+    def on_left_arrow(self, event):
+        game_frame = self.frames["GameFrame"]
+        if game_frame.winfo_ismapped() and "disabled" not in game_frame.optionA_button.state():
+            game_frame.choice("A")
+
+    def on_right_arrow(self, event):
+        game_frame = self.frames["GameFrame"]
+        if game_frame.winfo_ismapped() and "disabled" not in game_frame.optionB_button.state():
+            game_frame.choice("B")
+
+    def on_enter_key(self, event):
+        if self.frames["GameFrame"].winfo_ismapped():
+            if "disabled" not in self.frames["GameFrame"].next_button.state():
+                self.frames["GameFrame"].next_card()
+        elif self.frames["QuizFrame"].winfo_ismapped():
+            self.frames["QuizFrame"].submit_answer()
 
     def show_frame(self, frame_name):
         frame = self.frames[frame_name]
         frame.tkraise()
 
     def update_gauges_display(self):
-        self.frames["GameFrame"].update_gauges_label(
-            f"Budget: {self.gauges['budget']} | Loisirs: {self.gauges['loisirs']} | Épargne: {self.gauges['epargne']}"
-        )
+        gauges_text = f"Budget: {self.gauges['budget']} | Loisirs: {self.gauges['loisirs']} | Épargne: {self.gauges['epargne']}"
+        self.frames["GameFrame"].update_gauges_label(gauges_text)
 
     def load_next_card(self):
-        # Sauvegarde du point de reprise (checkpoint) avant de jouer une nouvelle carte
         self.checkpoint_state = (self.gauges["budget"], self.gauges["loisirs"], self.gauges["epargne"])
         self.checkpoint_log_index = len(self.game_log)
         self.current_card = random.choice(self.cards)
@@ -64,7 +147,6 @@ class SeriousGame(tk.Tk):
         self.update_gauges_display()
 
     def apply_choice(self, choice):
-        # Appliquer les effets selon le choix (A ou B)
         if choice == "A":
             effects = self.current_card["optionA"]["effects"]
             explanation = self.current_card["optionA"]["explanation"]
@@ -76,107 +158,114 @@ class SeriousGame(tk.Tk):
         else:
             return
 
-        # Mise à jour des jauges
         self.gauges["budget"] += effects.get("budget", 0)
         self.gauges["loisirs"] += effects.get("loisirs", 0)
         self.gauges["epargne"] += effects.get("epargne", 0)
 
-        # Enregistrement de la décision
         self.game_log.append({
-            "situation": self.current_card["question"],
+            "situation": self.current_card.get("question", "Question non définie"),
             "choix": choix_text,
             "explication": explanation
         })
 
-        # Affichage de l'explication dans la GameFrame
         self.frames["GameFrame"].show_explanation(explanation)
         self.update_gauges_display()
 
-        # Vérification de la condition de défaite (si une jauge est ≤ 0)
         if self.gauges["budget"] <= 0 or self.gauges["loisirs"] <= 0 or self.gauges["epargne"] <= 0:
             messagebox.showinfo("Défaite", "Oh non ! Une de vos jauges est tombée à 0.")
-            self.show_game_log()
             self.start_quiz()
         else:
-            # Autoriser le passage à la carte suivante
             self.frames["GameFrame"].enable_next_button()
 
-    def show_game_log(self):
-        # Affichage de l'historique des décisions
-        log_text = "Récapitulatif de vos décisions :\n"
-        for entry in self.game_log:
-            log_text += f"- {entry['situation']}\n   Choix: {entry['choix']}\n   Explication: {entry['explication']}\n"
-        messagebox.showinfo("Historique", log_text)
-
     def start_quiz(self):
-        # Initialisation des variables du quiz et passage au QuizFrame
         self.current_quiz_index = 0
-        self.quiz_answers = []  # stockera les réponses de l'utilisateur
+        self.quiz_answers = []
         self.frames["QuizFrame"].load_question(self.quiz_questions[self.current_quiz_index])
         self.show_frame("QuizFrame")
 
     def process_quiz_answer(self, answer):
-        # Enregistrer la réponse de l'utilisateur pour la question en cours
         self.quiz_answers.append(answer)
         self.current_quiz_index += 1
         if self.current_quiz_index < len(self.quiz_questions):
             self.frames["QuizFrame"].load_question(self.quiz_questions[self.current_quiz_index])
         else:
-            # Fin du quiz, évaluation des réponses
-            correct = True
-            for idx, q in enumerate(self.quiz_questions):
-                if self.quiz_answers[idx] != q["answer"]:
-                    correct = False
-                    break
+            correct = all(self.quiz_answers[i] == self.quiz_questions[i]["answer"] for i in range(len(self.quiz_questions)))
             if correct:
                 messagebox.showinfo("Quiz", "Bravo, toutes les réponses sont correctes ! Vous reprenez la partie.")
-                # Restauration du point de reprise
                 self.gauges["budget"], self.gauges["loisirs"], self.gauges["epargne"] = self.checkpoint_state
                 self.game_log = self.game_log[:self.checkpoint_log_index]
                 self.load_next_card()
                 self.show_frame("GameFrame")
             else:
-                messagebox.showinfo("Quiz", "Certaines réponses étaient incorrectes. Fin de la partie.")
+                corrections = "Correction du quiz:\n\n"
+                for idx, q in enumerate(self.quiz_questions):
+                    user_answer = self.quiz_answers[idx] if idx < len(self.quiz_answers) else "Non répondu"
+                    correct_answer = q["answer"]
+                    corrections += f"Q{idx+1}: {q.get('question', 'Question non définie')}\nVotre réponse: {user_answer} | Réponse correcte: {correct_answer}\n\n"
+                messagebox.showinfo("Quiz - Corrections", corrections)
+                messagebox.showinfo("Quiz", "Fin de la partie.")
                 self.destroy()
 
-
-class GameFrame(tk.Frame):
+class GameFrame(ttk.Frame):
     def __init__(self, parent, controller):
-        super().__init__(parent)
+        # Style pour la carte
+        style = ttk.Style()
+        style.configure("Card.TFrame", background="white", relief="raised", borderwidth=2)
+        # Style personnalisé pour le label de la question
+        style.configure("Question.TLabel", background="white", foreground="black", font=("Helvetica", 18))
+        super().__init__(parent, style="Card.TFrame")
         self.controller = controller
-        # Label pour afficher l'état des jauges
-        self.gauges_label = tk.Label(self, text="", font=("Helvetica", 14))
+
+        self.gauges_label = ttk.Label(self, text="", font=("Helvetica", 16, "bold"), bootstyle="info")
         self.gauges_label.pack(pady=10)
 
-        # Label pour afficher la question/situation
-        self.question_label = tk.Label(self, text="", wraplength=700, font=("Helvetica", 16))
-        self.question_label.pack(pady=20)
+        self.card_frame = ttk.Frame(self, style="Card.TFrame")
+        self.card_frame.pack(pady=20, padx=20)
 
-        # Label pour afficher l'explication après un choix
-        self.explanation_label = tk.Label(self, text="", wraplength=700, font=("Helvetica", 12), fg="blue")
+        self.character_label = ttk.Label(self.card_frame)
+        self.character_label.pack(side="left", padx=10, pady=10)
+
+        # Utilisation du style "Question.TLabel" pour le texte de la question
+        self.question_label = ttk.Label(self.card_frame, text="", wraplength=500, style="Question.TLabel")
+        self.question_label.pack(side="left", padx=10, pady=10)
+
+        self.explanation_label = ttk.Label(self, text="", wraplength=700, font=("Helvetica", 14, "italic"), foreground="blue")
         self.explanation_label.pack(pady=10)
 
-        # Cadre pour les boutons des options
-        self.buttons_frame = tk.Frame(self)
-        self.buttons_frame.pack(pady=20)
+        self.buttons_frame = ttk.Frame(self)
+        self.buttons_frame.pack(pady=10)
 
-        self.optionA_button = tk.Button(self.buttons_frame, text="Option A", width=20,
-                                        command=lambda: self.choice("A"))
-        self.optionA_button.grid(row=0, column=0, padx=10)
-        self.optionB_button = tk.Button(self.buttons_frame, text="Option B", width=20,
-                                        command=lambda: self.choice("B"))
-        self.optionB_button.grid(row=0, column=1, padx=10)
+        # Pour l'option A, on affiche la flèche gauche avant le texte
+        self.optionA_button = ttk.Button(
+            self.buttons_frame,
+            text="",
+            width=25,
+            command=lambda: self.choice("A"),
+            bootstyle="success"
+        )
+        self.optionA_button.grid(row=0, column=0, padx=20, pady=10)
+        # Pour l'option B, on affiche la flèche droite après le texte
+        self.optionB_button = ttk.Button(
+            self.buttons_frame,
+            text="",
+            width=25,
+            command=lambda: self.choice("B"),
+            bootstyle="danger"
+        )
+        self.optionB_button.grid(row=0, column=1, padx=20, pady=10)
 
-        # Bouton pour obtenir un indice
-        self.indice_button = tk.Button(self, text="Indice", command=self.show_indice)
+        if controller.logo_photo:
+            self.indice_button = ttk.Button(self, text="Indice du conseiller", image=controller.logo_photo,
+                                            compound="left", command=self.show_indice, bootstyle="info")
+        else:
+            self.indice_button = ttk.Button(self, text="Indice du conseiller", command=self.show_indice, bootstyle="info")
         self.indice_button.pack(pady=10)
 
-        # Bouton pour passer à la carte suivante (désactivé tant qu'aucun choix n'est validé)
-        self.next_button = tk.Button(self, text="Suivant", command=self.next_card, state="disabled")
+        self.next_button = ttk.Button(self, text="Suivant", command=self.next_card, state="disabled",
+                                       width=30, bootstyle="primary")
         self.next_button.pack(pady=10)
 
-        # Bouton pour quitter
-        self.quit_button = tk.Button(self, text="Quitter", command=self.controller.destroy)
+        self.quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, bootstyle="secondary")
         self.quit_button.pack(pady=10)
 
     def update_gauges_label(self, text):
@@ -184,19 +273,27 @@ class GameFrame(tk.Frame):
 
     def set_card(self, card):
         self.current_card = card
-        self.question_label.config(text=card["question"])
+        # Affichage de la question sur la carte avec le style défini
+        self.question_label.config(text=card.get("question", "Question non définie"))
         self.explanation_label.config(text="")
         self.next_button.config(state="disabled")
-        self.optionA_button.config(state="normal")
-        self.optionB_button.config(state="normal")
+        # Pour l'option A, affichage de la flèche gauche avant le texte
+        self.optionA_button.config(state="normal", text=f"← {card['optionA'].get('text', 'Option A')}")
+        # Pour l'option B, affichage du texte suivi de la flèche droite
+        self.optionB_button.config(state="normal", text=f"{card['optionB'].get('text', 'Option B')} →")
+        char_image = get_random_character_image(self.controller.character_dir, (150, 150))
+        if char_image:
+            self.character_label.config(image=char_image)
+            self.character_label.image = char_image
+        else:
+            self.character_label.config(text="Personnage", image="")
 
     def show_indice(self):
         if hasattr(self, "current_card"):
             indice = self.current_card.get("hint", "Pas d'indice disponible.")
-            messagebox.showinfo("Indice du conseiller financier", indice)
+            messagebox.showinfo("Indice du conseiller", indice)
 
     def choice(self, option):
-        # Désactiver les boutons des options après un choix
         self.optionA_button.config(state="disabled")
         self.optionB_button.config(state="disabled")
         self.controller.apply_choice(option)
@@ -210,35 +307,38 @@ class GameFrame(tk.Frame):
     def next_card(self):
         self.controller.load_next_card()
 
-
-class QuizFrame(tk.Frame):
+class QuizFrame(ttk.Frame):
     def __init__(self, parent, controller):
-        super().__init__(parent)
+        super().__init__(parent, bootstyle="warning")
         self.controller = controller
-        self.current_question = None
         self.var_answer = tk.StringVar()
 
-        self.question_label = tk.Label(self, text="", wraplength=700, font=("Helvetica", 16))
+        self.title_label = ttk.Label(self, text="Quiz Éducatif", font=("Helvetica", 20, "bold"))
+        self.title_label.pack(pady=20)
+
+        self.question_label = ttk.Label(self, text="", wraplength=700, font=("Helvetica", 18))
         self.question_label.pack(pady=20)
 
-        self.options_frame = tk.Frame(self)
+        self.options_frame = ttk.Frame(self)
         self.options_frame.pack(pady=10)
 
         self.radio_buttons = {}
         for option in ["A", "B", "C", "D"]:
-            rb = tk.Radiobutton(self.options_frame, text="", variable=self.var_answer, value=option,
-                                font=("Helvetica", 14))
-            rb.pack(anchor="w")
+            rb = ttk.Radiobutton(self.options_frame, text="", variable=self.var_answer, value=option, bootstyle="success")
+            rb.pack(anchor="w", padx=20, pady=5)
             self.radio_buttons[option] = rb
 
-        self.submit_button = tk.Button(self, text="Valider", command=self.submit_answer)
+        self.submit_button = ttk.Button(self, text="Valider", command=self.submit_answer, bootstyle="primary")
         self.submit_button.pack(pady=20)
+
+        self.quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, bootstyle="secondary")
+        self.quit_button.pack(pady=10)
 
     def load_question(self, question):
         self.current_question = question
-        self.question_label.config(text=question["question"])
-        self.var_answer.set(None)
-        options = question["options"]
+        self.question_label.config(text=question.get("question", "Question non définie"))
+        self.var_answer.set("")
+        options = question.get("options", {})
         for option in ["A", "B", "C", "D"]:
             text = options.get(option, "")
             self.radio_buttons[option].config(text=f"{option}: {text}")
@@ -249,7 +349,6 @@ class QuizFrame(tk.Frame):
             messagebox.showwarning("Attention", "Veuillez sélectionner une réponse.")
             return
         self.controller.process_quiz_answer(answer)
-
 
 if __name__ == "__main__":
     app = SeriousGame()
