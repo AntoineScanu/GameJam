@@ -53,7 +53,7 @@ def center_window(window, width, height):
 class SeriousGame(ttk.Window):
     def __init__(self):
         super().__init__(themename='flatly')
-        self.title("Serious Game - Gestion de Patrimoine")
+        self.title("ANACOFINANCE - Gestion de Patrimoine")
         self.geometry("1200x900")
         self.resizable(False, False)
         center_window(self, 1200, 900)
@@ -75,6 +75,7 @@ class SeriousGame(ttk.Window):
         style.configure("Secondary.TButton", background="#7a97b8", foreground="#fffefd")
         style.configure("Danger.TButton", background="#29373e", foreground="#fffefd")
         style.configure("Header.TFrame", background="#7a97b8")
+        # Modification du texte de l'en-tête pour afficher ANACOFINANCE
         style.configure("Header.TLabel", background="#7a97b8", foreground="#fffefd", font=("Helvetica", 20, "bold"))
         style.configure("Quiz.TFrame", background="#fffefd")
         style.configure("Quiz.TLabel", background="#fffefd", foreground="#29373e", font=("Helvetica", 18))
@@ -127,10 +128,10 @@ class SeriousGame(ttk.Window):
             self.frames[F.__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        # Affichage de l'en-tête
+        # Affichage de l'en-tête (modification du texte pour ANACOFINANCE)
         self.header_frame = ttk.Frame(self, style="Header.TFrame")
         self.header_frame.pack(side="top", fill="x")
-        header_label = ttk.Label(self.header_frame, text="Serious Game - Gestion de Patrimoine", style="Header.TLabel")
+        header_label = ttk.Label(self.header_frame, text="ANACOFINANCE - Gestion de Patrimoine", style="Header.TLabel")
         header_label.pack(pady=10)
 
         # Bindings pour le jeu et la touche 'i'
@@ -338,7 +339,10 @@ class MenuFrame(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent, style="TFrame")
         self.controller = controller
-        title = ttk.Label(self, text="Bienvenue dans le Serious Game", font=("Helvetica", 24, "bold"), style="TLabel")
+        # Ajout du logo dans le menu
+        logo_label = ttk.Label(self, image=self.controller.logo_photo)
+        logo_label.pack(pady=10)
+        title = ttk.Label(self, text="Bienvenue dans ANACOFINANCE", font=("Helvetica", 24, "bold"), style="TLabel")
         title.pack(pady=20)
         play_button = ttk.Button(self, text="Jouer", command=self.start_game, bootstyle="Primary")
         play_button.pack(pady=10, ipadx=10, ipady=5)
@@ -375,7 +379,6 @@ class GameFrame(ttk.Frame):
         super().__init__(parent, style="Card.TFrame")
         self.controller = controller
 
-        # Frame pour les jauges avec icônes
         self.gauges_frame = ttk.Frame(self)
         self.gauges_frame.pack(pady=10)
         self.budget_label = ttk.Label(self.gauges_frame, text="", image=self.controller.budget_icon, compound="left",
@@ -388,7 +391,7 @@ class GameFrame(ttk.Frame):
                                        style="Question.TLabel")
         self.epargne_label.pack(side="left", padx=10)
 
-        # Ajout d'un label pour afficher le score en cours
+        # Ajout du label de score
         self.score_label = ttk.Label(self, text="Score: 0", style="TLabel")
         self.score_label.pack(pady=5)
 
@@ -450,7 +453,6 @@ class GameFrame(ttk.Frame):
         )
         self.shortcuts_button.pack(pady=10)
 
-        # Bouton Retour au menu
         self.quit_button = ttk.Button(self, text="Retour au menu", command=self.controller.return_to_menu,
                                       style="Primary.TButton")
         self.quit_button.pack(pady=10, ipadx=10, ipady=5)
