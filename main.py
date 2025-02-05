@@ -84,8 +84,10 @@ class SeriousGame(ttk.Window):
 
         # Chargement des images depuis le dossier assets
         self.assets_dir = os.path.join(os.path.dirname(__file__), "assets")
+        logo_app_path = os.path.join(self.assets_dir, "logo_app.png")
         logo_path = os.path.join(self.assets_dir, "logo.png")
         self.logo_photo = load_image_from_file(logo_path, (40, 40))
+        self.logo_app = load_image_from_file(logo_app_path, (400, 400))
         self.budget_icon = load_image_from_file(os.path.join(self.assets_dir, "budget.png"), (30, 30))
         self.bonheur_icon = load_image_from_file(os.path.join(self.assets_dir, "bonheur.png"), (30, 30))
         self.epargne_icon = load_image_from_file(os.path.join(self.assets_dir, "epargne.png"), (30, 30))
@@ -340,7 +342,7 @@ class MenuFrame(ttk.Frame):
         super().__init__(parent, style="TFrame")
         self.controller = controller
         # Ajout du logo dans le menu
-        logo_label = ttk.Label(self, image=self.controller.logo_photo)
+        logo_label = ttk.Label(self, image=self.controller.logo_app)
         logo_label.pack(pady=10)
         title = ttk.Label(self, text="Bienvenue dans ANACOFINANCE", font=("Helvetica", 24, "bold"), style="TLabel")
         title.pack(pady=20)
@@ -354,17 +356,11 @@ class MenuFrame(ttk.Frame):
 
     def start_game(self):
         rules = (
-            "Règles du jeu :\n"
+            "Règles du jeu :\n\n"
             "- Gérez votre patrimoine en équilibrant votre Budget, votre Bonheur et votre Épargne.\n"
             "- Chaque décision aura un impact sur ces trois jauges.\n"
             "- Si l'une de vos jauges tombe à 0, vous aurez une chance unique de reprendre via un quiz.\n"
             "- Si vous réussissez le quiz, vous reprenez votre partie depuis l'état précédent.\n"
-            "- Utilisez les raccourcis :\n"
-            "    • Flèche gauche (←) : Sélectionner l'option A / passer\n"
-            "    • Flèche droite (→) : Sélectionner l'option B / passer\n"
-            "    • Entrée : Valider ou passer à la question suivante\n"
-            "    • 'i' : Afficher l'indice\n"
-            "    • Dans le quiz, utilisez ↑/↓ pour naviguer et Entrée pour valider."
         )
         messagebox.showinfo("Règles", rules)
         self.controller.load_next_card()
