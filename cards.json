@@ -46,7 +46,7 @@
     "hint": "La voiture est indispensable, mais la réparation peut peser lourd sur votre budget.",
     "optionA": {
       "text": "Payer la réparation",
-      "effects": {"budget": -30, "loisirs": 0, "epargne": -5},
+      "effects": {"budget": -5, "loisirs": 0, "epargne": -15},
       "explanation": "La réparation est coûteuse, mais indispensable pour votre mobilité."
     },
     "optionB": {

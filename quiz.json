@@ -7,7 +7,8 @@
       "C": "Une liste d'achats",
       "D": "Un compte d'épargne"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "Un budget est un outil qui vous permet de planifier et de suivre vos revenus et dépenses afin de mieux gérer vos finances personnelles."
   },
   {
     "question": "Qu'est-ce que l'épargne ?",
@@ -17,7 +18,8 @@
       "C": "Argent emprunté",
       "D": "Argent investi"
     },
-    "answer": "B"
+    "answer": "B",
+    "explanation": "L'épargne consiste à conserver une partie de ses revenus pour financer des projets futurs ou faire face à des imprévus."
   },
   {
     "question": "Quelle est la fonction principale d'un budget ?",
@@ -27,7 +29,8 @@
       "C": "Calculer vos impôts",
       "D": "Planifier vos loisirs"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "La fonction principale d'un budget est de vous aider à contrôler vos dépenses et à assurer que vos revenus couvrent vos dépenses."
   },
   {
     "question": "Qu'est-ce qu'un crédit responsable ?",
@@ -37,7 +40,8 @@
       "C": "Emprunter pour des achats impulsifs",
       "D": "Aucune des réponses"
     },
-    "answer": "B"
+    "answer": "B",
+    "explanation": "Un crédit responsable est contracté en fonction de vos capacités de remboursement, afin d'éviter le surendettement."
   },
   {
     "question": "Pourquoi est-il important d'avoir un fonds d'urgence ?",
@@ -47,7 +51,8 @@
       "C": "Pour payer des vacances",
       "D": "Pour acheter des biens de luxe"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "Un fonds d'urgence vous permet de couvrir les dépenses imprévues sans recourir à l'endettement."
   },
   {
     "question": "Quelle est la principale différence entre épargne et investissement ?",
@@ -57,7 +62,8 @@
       "C": "L'épargne rapporte plus d'intérêts que l'investissement",
       "D": "Il n'y a aucune différence"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "L'épargne consiste à mettre de l'argent de côté en toute sécurité, tandis que l'investissement implique un risque mais offre la possibilité de rendements plus élevés."
   },
   {
     "question": "Qu'est-ce que la consommation responsable ?",
@@ -67,7 +73,8 @@
       "C": "Acheter uniquement des produits de luxe",
       "D": "Ignorer la qualité des produits"
     },
-    "answer": "B"
+    "answer": "B",
+    "explanation": "La consommation responsable signifie faire des choix d'achat réfléchis et adaptés à ses besoins et moyens, afin d'optimiser ses dépenses."
   },
   {
     "question": "Pourquoi est-il crucial de suivre régulièrement ses finances ?",
@@ -77,7 +84,8 @@
       "C": "Pour emprunter davantage",
       "D": "Pour ignorer les dépenses"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "Suivre régulièrement vos finances permet d'identifier rapidement tout déséquilibre et de prendre des mesures correctives avant que des problèmes ne surviennent."
   },
   {
     "question": "Que signifie 'taux d'intérêt' ?",
@@ -87,7 +95,8 @@
       "C": "Le nombre de crédits souscrits",
       "D": "Une taxe sur le revenu"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "Le taux d'intérêt est le pourcentage appliqué au capital pour calculer le montant des intérêts, que ce soit pour un prêt ou un placement."
   },
   {
     "question": "Quel est l'avantage d'une consommation planifiée ?",
@@ -97,7 +106,8 @@
       "C": "Ignorer son budget",
       "D": "Augmenter ses dettes"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "Planifier sa consommation permet de mieux gérer son budget et d'éviter les dépenses superflues."
   },
   {
     "question": "Comment peut-on améliorer sa gestion financière ?",
@@ -107,7 +117,8 @@
       "C": "En empruntant systématiquement",
       "D": "En ne surveillant pas ses dépenses"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "La création et le suivi d'un budget vous aident à contrôler vos finances et à prendre des décisions éclairées."
   },
   {
     "question": "Qu'est-ce qu'un crédit à taux fixe ?",
@@ -117,7 +128,8 @@
       "C": "Un crédit sans intérêt",
       "D": "Un crédit remboursable en une seule fois"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "Un crédit à taux fixe vous permet de connaître exactement le montant des intérêts que vous paierez, car il ne change pas durant la vie du prêt."
   },
   {
     "question": "Pourquoi est-il important d'investir son argent ?",
@@ -127,7 +139,8 @@
       "C": "Pour augmenter ses dettes",
       "D": "Pour ignorer la gestion de son budget"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "Investir permet de faire croître vos économies et de compenser l'effet de l'inflation sur le long terme."
   },
   {
     "question": "Que signifie diversifier ses investissements ?",
@@ -137,7 +150,8 @@
       "C": "Mettre tout son argent dans l'épargne",
       "D": "Ne pas investir du tout"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "Diversifier consiste à répartir ses investissements sur plusieurs domaines afin de réduire l'impact négatif d'une mauvaise performance dans un secteur."
   },
   {
     "question": "Pourquoi est-il recommandé de comparer les offres financières ?",
@@ -147,6 +161,117 @@
       "C": "Pour payer plus cher",
       "D": "Pour ignorer les différences"
     },
-    "answer": "A"
+    "answer": "A",
+    "explanation": "Comparer les offres financières vous permet de sélectionner celle qui correspond le mieux à vos besoins et à votre budget, optimisant ainsi vos dépenses."
+  },
+  {
+    "question": "Qu'est-ce qu'un taux d'intérêt variable ?",
+    "options": {
+      "A": "Un taux qui reste constant pendant toute la durée du prêt",
+      "B": "Un taux qui peut fluctuer en fonction des conditions du marché",
+      "C": "Un taux fixé uniquement pour les crédits immobiliers",
+      "D": "Un taux déterminé par l'inflation uniquement"
+    },
+    "answer": "B",
+    "explanation": "Un taux d'intérêt variable peut augmenter ou diminuer selon l'évolution des conditions du marché, ce qui peut impacter vos paiements mensuels."
+  },
+  {
+    "question": "Pourquoi est-il important de planifier ses dépenses mensuelles ?",
+    "options": {
+      "A": "Pour avoir une vision claire de ses revenus et éviter les imprévus",
+      "B": "Pour pouvoir dépenser sans compter",
+      "C": "Pour augmenter ses dettes",
+      "D": "Pour suivre les dépenses de ses amis"
+    },
+    "answer": "A",
+    "explanation": "Planifier vos dépenses mensuelles vous aide à mieux gérer votre budget et à prévenir les situations financières difficiles."
+  },
+  {
+    "question": "Quel est l'avantage de comparer les offres de crédit avant de contracter un emprunt ?",
+    "options": {
+      "A": "Cela permet de trouver le taux d'intérêt le plus avantageux",
+      "B": "Cela permet d'obtenir un crédit sans garantie",
+      "C": "Cela permet de prolonger la durée du prêt",
+      "D": "Il n'y a aucun avantage"
+    },
+    "answer": "A",
+    "explanation": "Comparer les offres de crédit vous permet de choisir la meilleure option en termes de taux d'intérêt et de conditions, réduisant ainsi vos coûts financiers."
+  },
+  {
+    "question": "Comment peut-on réduire ses frais bancaires ?",
+    "options": {
+      "A": "En multipliant les comptes bancaires",
+      "B": "En comparant les offres et en choisissant une banque à faibles frais",
+      "C": "En augmentant ses dépenses quotidiennes",
+      "D": "En ignorant ses relevés bancaires"
+    },
+    "answer": "B",
+    "explanation": "En comparant les frais bancaires et en choisissant une banque qui propose des tarifs avantageux, vous pouvez réduire les coûts associés à la gestion de vos comptes."
+  },
+  {
+    "question": "Qu'est-ce que la capitalisation ?",
+    "options": {
+      "A": "La conversion des intérêts en capital pour faire croître l'investissement",
+      "B": "Le paiement des intérêts en espèces",
+      "C": "La diminution des dépenses mensuelles",
+      "D": "Une technique de réduction des impôts"
+    },
+    "answer": "A",
+    "explanation": "La capitalisation consiste à réinvestir les intérêts générés par un placement pour augmenter le montant total investi, favorisant ainsi la croissance sur le long terme."
+  },
+  {
+    "question": "Pourquoi est-il recommandé de diversifier ses investissements ?",
+    "options": {
+      "A": "Pour réduire le risque en répartissant les investissements sur plusieurs secteurs",
+      "B": "Pour concentrer tous ses investissements dans un seul domaine",
+      "C": "Pour augmenter ses frais de gestion",
+      "D": "Pour obtenir des rendements garantis"
+    },
+    "answer": "A",
+    "explanation": "Diversifier vos investissements permet de ne pas être trop exposé à un seul secteur et ainsi réduire les risques de pertes importantes."
+  },
+  {
+    "question": "Quel est le rôle principal d'une assurance-vie dans une stratégie patrimoniale ?",
+    "options": {
+      "A": "Assurer la protection financière de la famille et faciliter la transmission du patrimoine",
+      "B": "Augmenter immédiatement votre pouvoir d'achat",
+      "C": "Financer des achats impulsifs",
+      "D": "Éviter de payer des impôts"
+    },
+    "answer": "A",
+    "explanation": "L'assurance-vie permet de protéger financièrement vos proches et offre des avantages fiscaux pour la transmission de patrimoine."
+  },
+  {
+    "question": "Que signifie l'effet de levier financier ?",
+    "options": {
+      "A": "Utiliser l'emprunt pour augmenter sa capacité d'investissement",
+      "B": "Réduire ses dettes en payant comptant",
+      "C": "Investir uniquement dans l'épargne",
+      "D": "Augmenter ses dépenses en loisirs"
+    },
+    "answer": "A",
+    "explanation": "L'effet de levier financier consiste à utiliser des fonds empruntés pour augmenter la taille de votre investissement, ce qui peut amplifier vos gains mais aussi vos pertes."
+  },
+  {
+    "question": "Pourquoi est-il important de suivre régulièrement l'actualité économique et financière ?",
+    "options": {
+      "A": "Pour ajuster sa stratégie d'investissement en fonction des évolutions du marché",
+      "B": "Pour ignorer les tendances du marché",
+      "C": "Pour augmenter ses dépenses personnelles",
+      "D": "Pour éviter de comparer les offres financières"
+    },
+    "answer": "A",
+    "explanation": "Suivre l'actualité économique vous permet d'anticiper les évolutions du marché et d'ajuster vos investissements en conséquence."
+  },
+  {
+    "question": "Qu'est-ce qu'un portefeuille diversifié ?",
+    "options": {
+      "A": "Un portefeuille comprenant différents types d'actifs pour répartir le risque",
+      "B": "Un portefeuille constitué uniquement d'actions",
+      "C": "Un portefeuille qui ne comporte qu'une seule classe d'actifs",
+      "D": "Un portefeuille sans gestion active"
+    },
+    "answer": "A",
+    "explanation": "Un portefeuille diversifié inclut plusieurs types d'actifs, ce qui permet de réduire le risque global en compensant les pertes éventuelles dans un secteur par des gains dans un autre."
   }
 ]
