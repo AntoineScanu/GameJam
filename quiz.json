@@ -1,0 +1,102 @@
+[
+    {
+        "question": "Qu'est-ce qu'un budget ?",
+        "options": {
+            "A": "Un document qui détaille vos revenus et vos dépenses",
+            "B": "Une liste de souhaits",
+            "C": "Un calcul des impôts",
+            "D": "Un plan de carrière"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Que représente l'épargne ?",
+        "options": {
+            "A": "De l'argent dépensé",
+            "B": "De l'argent mis de côté",
+            "C": "De l'argent emprunté",
+            "D": "De l'argent perdu"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Le crédit consiste à :",
+        "options": {
+            "A": "Prêter de l'argent à quelqu'un",
+            "B": "Emprunter de l'argent",
+            "C": "Épargner de l'argent",
+            "D": "Gagner de l'argent"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Pourquoi est-il important de gérer son budget ?",
+        "options": {
+            "A": "Pour éviter les dettes et anticiper ses dépenses",
+            "B": "Pour pouvoir tout acheter",
+            "C": "Pour dépenser sans réfléchir",
+            "D": "Pour ignorer ses finances"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Que signifie la consommation responsable ?",
+        "options": {
+            "A": "Acheter sans se soucier du prix",
+            "B": "Acheter en fonction de ses besoins réels",
+            "C": "Acheter uniquement de la nourriture",
+            "D": "Acheter tout ce qui est en solde"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Comment augmenter son épargne ?",
+        "options": {
+            "A": "En dépensant plus",
+            "B": "En économisant une partie de ses revenus",
+            "C": "En empruntant de l'argent",
+            "D": "En dépensant pour des loisirs"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Pour une bonne gestion financière, il est important de :",
+        "options": {
+            "A": "Prioriser les dépenses essentielles et l'épargne",
+            "B": "Dépenser pour des loisirs coûteux",
+            "C": "Souscrire à tous les crédits",
+            "D": "Avoir des achats impulsifs"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Quel est l'avantage d'un revenu régulier ?",
+        "options": {
+            "A": "Il permet de mieux planifier ses dépenses",
+            "B": "Il permet d'acheter des biens de luxe",
+            "C": "Il n'a aucun avantage",
+            "D": "Il permet de dépenser sans compter"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Qu'est-ce qu'un crédit responsable ?",
+        "options": {
+            "A": "Emprunter sans plan de remboursement",
+            "B": "Emprunter en fonction de ses capacités de remboursement",
+            "C": "Emprunter pour acheter des biens inutiles",
+            "D": "Emprunter sans intérêt"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Pourquoi est-il important de distinguer revenus et dépenses ?",
+        "options": {
+            "A": "Pour savoir combien d'argent il vous reste",
+            "B": "Pour dépenser tout votre argent",
+            "C": "Pour ignorer vos finances",
+            "D": "Pour emprunter davantage"
+        },
+        "answer": "A"
+    }
+]
