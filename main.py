@@ -102,10 +102,10 @@ class SeriousGame(ttk.Window):
         header_label.pack(pady=10)
 
         # Label d'instructions pour les raccourcis clavier
-        self.shortcuts_label = ttk.Label(self, text="Raccourcis: ← = Option A | → = Option B | Entrée = Suivant/Valider", font=("Helvetica", 12))
+        self.shortcuts_label = ttk.Label(self, text="Raccourcis: Pour le jeu → ← pour choisir, Entrée ou flèche pour passer; Pour le quiz ↑/↓ pour naviguer, Entrée pour valider", font=("Helvetica", 12))
         self.shortcuts_label.pack(side="bottom", pady=5)
 
-        # Lier les touches fléchées et Entrée
+        # Lier les touches fléchées et Entrée (pour la partie jeu)
         self.bind("<Left>", self.on_left_arrow)
         self.bind("<Right>", self.on_right_arrow)
         self.bind("<Return>", self.on_enter_key)
@@ -115,19 +115,31 @@ class SeriousGame(ttk.Window):
         self.load_next_card()
 
     def on_left_arrow(self, event):
+        # Pour la partie jeu, si la frame de jeu est visible
         game_frame = self.frames["GameFrame"]
-        if game_frame.winfo_ismapped() and "disabled" not in game_frame.optionA_button.state():
-            game_frame.choice("A")
+        if game_frame.winfo_ismapped():
+            # Si le bouton "Suivant" est activé, passer à la question suivante
+            if "disabled" not in game_frame.next_button.state():
+                game_frame.next_card()
+            # Sinon, sélectionner l'option A
+            elif "disabled" not in game_frame.optionA_button.state():
+                game_frame.choice("A")
 
     def on_right_arrow(self, event):
+        # Pour la partie jeu, idem pour l'option B
         game_frame = self.frames["GameFrame"]
-        if game_frame.winfo_ismapped() and "disabled" not in game_frame.optionB_button.state():
-            game_frame.choice("B")
+        if game_frame.winfo_ismapped():
+            if "disabled" not in game_frame.next_button.state():
+                game_frame.next_card()
+            elif "disabled" not in game_frame.optionB_button.state():
+                game_frame.choice("B")
 
     def on_enter_key(self, event):
+        # Dans la partie jeu, si le bouton "Suivant" est activé, passer à la question suivante
         if self.frames["GameFrame"].winfo_ismapped():
             if "disabled" not in self.frames["GameFrame"].next_button.state():
                 self.frames["GameFrame"].next_card()
+        # Dans le quiz, la touche Entrée valide la réponse (le quiz gère ses propres flèches)
         elif self.frames["QuizFrame"].winfo_ismapped():
             self.frames["QuizFrame"].submit_answer()
 
@@ -211,7 +223,7 @@ class GameFrame(ttk.Frame):
         # Style pour la carte
         style = ttk.Style()
         style.configure("Card.TFrame", background="white", relief="raised", borderwidth=2)
-        # Style personnalisé pour le label de la question
+        # Style pour le label de la question
         style.configure("Question.TLabel", background="white", foreground="black", font=("Helvetica", 18))
         super().__init__(parent, style="Card.TFrame")
         self.controller = controller
@@ -225,7 +237,6 @@ class GameFrame(ttk.Frame):
         self.character_label = ttk.Label(self.card_frame)
         self.character_label.pack(side="left", padx=10, pady=10)
 
-        # Utilisation du style "Question.TLabel" pour le texte de la question
         self.question_label = ttk.Label(self.card_frame, text="", wraplength=500, style="Question.TLabel")
         self.question_label.pack(side="left", padx=10, pady=10)
 
@@ -235,7 +246,7 @@ class GameFrame(ttk.Frame):
         self.buttons_frame = ttk.Frame(self)
         self.buttons_frame.pack(pady=10)
 
-        # Pour l'option A, on affiche la flèche gauche avant le texte
+        # Pour l'option A, la flèche gauche précède le texte
         self.optionA_button = ttk.Button(
             self.buttons_frame,
             text="",
@@ -244,7 +255,7 @@ class GameFrame(ttk.Frame):
             bootstyle="success"
         )
         self.optionA_button.grid(row=0, column=0, padx=20, pady=10)
-        # Pour l'option B, on affiche la flèche droite après le texte
+        # Pour l'option B, le texte est suivi de la flèche droite
         self.optionB_button = ttk.Button(
             self.buttons_frame,
             text="",
@@ -273,13 +284,10 @@ class GameFrame(ttk.Frame):
 
     def set_card(self, card):
         self.current_card = card
-        # Affichage de la question sur la carte avec le style défini
         self.question_label.config(text=card.get("question", "Question non définie"))
         self.explanation_label.config(text="")
         self.next_button.config(state="disabled")
-        # Pour l'option A, affichage de la flèche gauche avant le texte
         self.optionA_button.config(state="normal", text=f"← {card['optionA'].get('text', 'Option A')}")
-        # Pour l'option B, affichage du texte suivi de la flèche droite
         self.optionB_button.config(state="normal", text=f"{card['optionB'].get('text', 'Option B')} →")
         char_image = get_random_character_image(self.controller.character_dir, (150, 150))
         if char_image:
@@ -334,7 +342,12 @@ class QuizFrame(ttk.Frame):
         self.quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, bootstyle="secondary")
         self.quit_button.pack(pady=10)
 
+        # Bindings pour naviguer avec les flèches dans le quiz
+        self.bind("<Up>", self.on_up_arrow)
+        self.bind("<Down>", self.on_down_arrow)
+
     def load_question(self, question):
+        self.focus_set()  # Assure que la frame capte les événements clavier
         self.current_question = question
         self.question_label.config(text=question.get("question", "Question non définie"))
         self.var_answer.set("")
@@ -342,6 +355,26 @@ class QuizFrame(ttk.Frame):
         for option in ["A", "B", "C", "D"]:
             text = options.get(option, "")
             self.radio_buttons[option].config(text=f"{option}: {text}")
+
+    def on_up_arrow(self, event):
+        options = ["A", "B", "C", "D"]
+        current = self.var_answer.get()
+        if current not in options:
+            new_index = 0
+        else:
+            idx = options.index(current)
+            new_index = (idx - 1) % len(options)
+        self.var_answer.set(options[new_index])
+
+    def on_down_arrow(self, event):
+        options = ["A", "B", "C", "D"]
+        current = self.var_answer.get()
+        if current not in options:
+            new_index = 0
+        else:
+            idx = options.index(current)
+            new_index = (idx + 1) % len(options)
+        self.var_answer.set(options[new_index])
 
     def submit_answer(self):
         answer = self.var_answer.get()
