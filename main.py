@@ -303,11 +303,11 @@ class GameFrame(ttk.Frame):
         # Création d'un frame pour les jauges avec icônes
         self.gauges_frame = ttk.Frame(self)
         self.gauges_frame.pack(pady=10)
-        self.budget_label = ttk.Label(self.gauges_frame, text="", image=self.controller.budget_icon, compound="left", style="TLabel")
+        self.budget_label = ttk.Label(self.gauges_frame, text="", image=self.controller.budget_icon, compound="left", style="Question.TLabel")
         self.budget_label.pack(side="left", padx=10)
-        self.bonheur_label = ttk.Label(self.gauges_frame, text="", image=self.controller.bonheur_icon, compound="left", style="TLabel")
+        self.bonheur_label = ttk.Label(self.gauges_frame, text="", image=self.controller.bonheur_icon, compound="left", style="Question.TLabel")
         self.bonheur_label.pack(side="left", padx=10)
-        self.epargne_label = ttk.Label(self.gauges_frame, text="", image=self.controller.epargne_icon, compound="left", style="TLabel")
+        self.epargne_label = ttk.Label(self.gauges_frame, text="", image=self.controller.epargne_icon, compound="left", style="Question.TLabel")
         self.epargne_label.pack(side="left", padx=10)
 
         self.card_frame = ttk.Frame(self, style="Card.TFrame")
