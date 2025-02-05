@@ -53,25 +53,21 @@ class SeriousGame(ttk.Window):
         self.geometry("1200x900")
         self.resizable(False, False)
         center_window(self, 1200, 900)
-        # Fond principal selon la charte (blanc cassé)
-        self.configure(bg="#fffefd")
+        self.configure(bg="#fffefd")  # Fond principal blanc cassé
 
-        # Configuration globale du style pour appliquer la charte graphique
+        # Configuration globale des styles
         style = ttk.Style()
         style.theme_use('flatly')
-        # Style général
         style.configure("TFrame", background="#fffefd")
         style.configure("TLabel", background="#fffefd", foreground="#29373e")
-        # Style pour la carte (jeu)
         style.configure("Card.TFrame", background="#fffefd", relief="raised", borderwidth=2)
         style.configure("Question.TLabel", background="#fffefd", foreground="#29373e", font=("Helvetica", 18))
-        # Boutons pour le jeu
         style.configure("Success.TButton", background="#d8e5ab", foreground="#29373e")
         style.configure("Primary.TButton", background="#29373e", foreground="#fffefd")
         style.configure("Info.TButton", background="#7a97b8", foreground="#fffefd")
         style.configure("Secondary.TButton", background="#7a97b8", foreground="#fffefd")
         style.configure("Danger.TButton", background="#29373e", foreground="#fffefd")
-        # Styles spécifiques pour l'en-tête
+        # Style pour l'en-tête
         style.configure("Header.TFrame", background="#7a97b8")
         style.configure("Header.TLabel", background="#7a97b8", foreground="#fffefd", font=("Helvetica", 20, "bold"))
         # Styles pour le quiz
@@ -80,21 +76,22 @@ class SeriousGame(ttk.Window):
         style.configure("Quiz.TRadiobutton", background="#fffefd", foreground="#29373e", font=("Helvetica", 14))
         style.configure("Quiz.TButton", background="#29373e", foreground="#fffefd")
 
-        # Dossier assets et logo
+        # Chargement des images depuis le dossier assets
         self.assets_dir = os.path.join(os.path.dirname(__file__), "assets")
         logo_path = os.path.join(self.assets_dir, "logo.png")
         self.logo_photo = load_image_from_file(logo_path, (40, 40))
-
-        # Dossier images de personnage
+        self.budget_icon = load_image_from_file(os.path.join(self.assets_dir, "budget.png"), (30, 30))
+        self.bonheur_icon = load_image_from_file(os.path.join(self.assets_dir, "bonheur.png"), (30, 30))
+        self.epargne_icon = load_image_from_file(os.path.join(self.assets_dir, "epargne.png"), (30, 30))
         self.character_dir = os.path.join(self.assets_dir, "character")
 
-        # État initial
-        self.gauges = {"budget": 50, "loisirs": 50, "epargne": 50}
+        # Modification des jauges (remplacement de "loisirs" par "bonheur")
+        self.gauges = {"budget": 50, "bonheur": 50, "epargne": 50}
         self.game_log = []
         self.checkpoint_state = None
         self.checkpoint_log_index = None
 
-        # Chargement des données JSON
+        # Chargement des fichiers JSON
         try:
             with open("cards.json", "r", encoding="utf-8") as f:
                 self.cards = json.load(f)
@@ -108,70 +105,83 @@ class SeriousGame(ttk.Window):
             messagebox.showerror("Erreur", f"Impossible de charger quiz.json: {e}")
             self.destroy()
 
-        # Pour le quiz, on sélectionne 10 questions aléatoires
+        # Pour le quiz, sélection de 10 questions aléatoires
         self.current_quiz_list = []
 
-        # Conteneur principal
+        # Création d'un conteneur principal pour les frames
         self.container = ttk.Frame(self)
         self.container.pack(expand=True)
 
-        # Création des frames de jeu et de quiz
+        # Création du menu de démarrage
+        self.menu_frame = MenuFrame(parent=self.container, controller=self)
+        self.menu_frame.grid(row=0, column=0, sticky="nsew")
+
+        # Création des autres frames (jeu et quiz)
         self.frames = {}
         for F in (GameFrame, QuizFrame):
             frame = F(parent=self.container, controller=self)
             self.frames[F.__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        # En-tête avec style personnalisé
+        # Affichage de l'en-tête
         self.header_frame = ttk.Frame(self, style="Header.TFrame")
         self.header_frame.pack(side="top", fill="x")
         header_label = ttk.Label(self.header_frame, text="Serious Game - Gestion de Patrimoine", style="Header.TLabel")
         header_label.pack(pady=10)
-        # Bindings pour le jeu et pour la touche 'i'
+
+        # (Le label d'instructions a été supprimé)
+        # Bindings pour le jeu et la touche indice 'i'
         self.bind("<Left>", self.on_left_arrow)
         self.bind("<Right>", self.on_right_arrow)
         self.bind("<Return>", self.on_enter_key)
         self.bind("<i>", self.on_i_key)
 
-        self.show_frame("GameFrame")
-        self.load_next_card()
+        # Au démarrage, on affiche le menu
+        self.show_frame("MenuFrame")
 
     def on_left_arrow(self, event):
-        game_frame = self.frames["GameFrame"]
-        if game_frame.winfo_ismapped():
+        # Si nous sommes dans le jeu
+        game_frame = self.frames.get("GameFrame")
+        if game_frame and game_frame.winfo_ismapped():
             if "disabled" not in game_frame.next_button.state():
                 game_frame.next_card()
             elif "disabled" not in game_frame.optionA_button.state():
                 game_frame.choice("A")
 
     def on_right_arrow(self, event):
-        game_frame = self.frames["GameFrame"]
-        if game_frame.winfo_ismapped():
+        game_frame = self.frames.get("GameFrame")
+        if game_frame and game_frame.winfo_ismapped():
             if "disabled" not in game_frame.next_button.state():
                 game_frame.next_card()
             elif "disabled" not in game_frame.optionB_button.state():
                 game_frame.choice("B")
 
     def on_enter_key(self, event):
-        if self.frames["GameFrame"].winfo_ismapped():
+        if self.frames.get("GameFrame") and self.frames["GameFrame"].winfo_ismapped():
             if "disabled" not in self.frames["GameFrame"].next_button.state():
                 self.frames["GameFrame"].next_card()
-        elif self.frames["QuizFrame"].winfo_ismapped():
+        elif self.frames.get("QuizFrame") and self.frames["QuizFrame"].winfo_ismapped():
             self.frames["QuizFrame"].submit_answer()
 
     def on_i_key(self, event):
-        if self.frames["GameFrame"].winfo_ismapped():
+        if self.frames.get("GameFrame") and self.frames["GameFrame"].winfo_ismapped():
             self.frames["GameFrame"].show_indice()
 
     def show_frame(self, frame_name):
-        self.frames[frame_name].tkraise()
+        if frame_name in self.frames:
+            self.frames[frame_name].tkraise()
+        elif frame_name == "MenuFrame":
+            self.menu_frame.tkraise()
 
     def update_gauges_display(self):
-        gauges_text = f"Budget: {self.gauges['budget']} | Loisirs: {self.gauges['loisirs']} | Épargne: {self.gauges['epargne']}"
-        self.frames["GameFrame"].update_gauges_label(gauges_text)
+        self.frames["GameFrame"].update_gauges_label(
+            self.gauges["budget"],
+            self.gauges["bonheur"],
+            self.gauges["epargne"]
+        )
 
     def load_next_card(self):
-        self.checkpoint_state = (self.gauges["budget"], self.gauges["loisirs"], self.gauges["epargne"])
+        self.checkpoint_state = (self.gauges["budget"], self.gauges["bonheur"], self.gauges["epargne"])
         self.checkpoint_log_index = len(self.game_log)
         self.current_card = random.choice(self.cards)
         self.frames["GameFrame"].set_card(self.current_card)
@@ -190,7 +200,11 @@ class SeriousGame(ttk.Window):
             return
 
         self.gauges["budget"] += effects.get("budget", 0)
-        self.gauges["loisirs"] += effects.get("loisirs", 0)
+        # Si le JSON utilise encore "loisirs", on ajoute cette valeur à "bonheur"
+        self.gauges["bonheur"] += effects.get("loisirs", 0)
+        # Si le JSON a été modifié pour utiliser "bonheur", on peut aussi récupérer directement l'effet "bonheur"
+        if "bonheur" in effects:
+            self.gauges["bonheur"] += effects.get("bonheur", 0)
         self.gauges["epargne"] += effects.get("epargne", 0)
 
         self.game_log.append({
@@ -199,17 +213,15 @@ class SeriousGame(ttk.Window):
             "explanation": explanation
         })
 
-        # Dans cette version, nous ne montrons plus d'explication dans l'interface de jeu.
         self.update_gauges_display()
 
-        if self.gauges["budget"] <= 0 or self.gauges["loisirs"] <= 0 or self.gauges["epargne"] <= 0:
+        if self.gauges["budget"] <= 0 or self.gauges["bonheur"] <= 0 or self.gauges["epargne"] <= 0:
             messagebox.showinfo("Défaite", "Oh non ! Une de vos jauges est tombée à 0.")
             self.start_quiz()
         else:
             self.frames["GameFrame"].enable_next_button()
 
     def start_quiz(self):
-        # Sélectionner 10 questions aléatoires pour le quiz
         total_questions = min(10, len(self.quiz_questions))
         self.current_quiz_list = random.sample(self.quiz_questions, total_questions)
         self.current_quiz_index = 0
@@ -230,7 +242,6 @@ class SeriousGame(ttk.Window):
                 self.current_quiz_index + 1, total
             )
         else:
-            # Préparer les corrections pour les questions erronées
             corrections = ""
             for i, q in enumerate(self.current_quiz_list):
                 if self.quiz_answers[i] != q["answer"]:
@@ -243,10 +254,43 @@ class SeriousGame(ttk.Window):
                 self.destroy()
             else:
                 messagebox.showinfo("Quiz", "Bravo, toutes les réponses sont correctes ! Vous reprenez la partie.")
-                self.gauges["budget"], self.gauges["loisirs"], self.gauges["epargne"] = self.checkpoint_state
+                self.gauges["budget"], self.gauges["bonheur"], self.gauges["epargne"] = self.checkpoint_state
                 self.game_log = self.game_log[:self.checkpoint_log_index]
                 self.load_next_card()
                 self.show_frame("GameFrame")
+
+class MenuFrame(ttk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent, style="TFrame")
+        self.controller = controller
+        # Titre du menu
+        title = ttk.Label(self, text="Bienvenue dans le Serious Game", font=("Helvetica", 24, "bold"), style="TLabel")
+        title.pack(pady=20)
+        # Bouton Jouer
+        play_button = ttk.Button(self, text="Jouer", command=self.start_game, bootstyle="Primary")
+        play_button.pack(pady=10, ipadx=10, ipady=5)
+        # Bouton Quitter
+        quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, bootstyle="Secondary")
+        quit_button.pack(pady=10, ipadx=10, ipady=5)
+
+    def start_game(self):
+        rules = (
+            "Règles du jeu :\n"
+            "- Vous devez gérer votre patrimoine en équilibrant votre Budget, votre Bonheur et votre Épargne.\n"
+            "- Chaque décision aura un impact sur ces trois jauges.\n"
+            "- Si l'une de vos jauges tombe à 0, vous passez au quiz de fin de partie.\n"
+            "- Si vous répondez correctement aux 10 questions du quiz, vous reprenez votre partie depuis l'état précédent.\n"
+            "- Utilisez les raccourcis :\n"
+            "   • Flèche gauche (←) : Sélectionner l'option A / passer\n"
+            "   • Flèche droite (→) : Sélectionner l'option B / passer\n"
+            "   • Entrée : Valider ou passer\n"
+            "   • 'i' : Afficher l'indice\n"
+            "   • Dans le quiz, utilisez ↑/↓ pour naviguer et Entrée pour valider."
+        )
+        messagebox.showinfo("Règles", rules)
+        # Démarre le jeu
+        self.controller.load_next_card()
+        self.controller.show_frame("GameFrame")
 
 class GameFrame(ttk.Frame):
     def __init__(self, parent, controller):
@@ -256,8 +300,15 @@ class GameFrame(ttk.Frame):
         super().__init__(parent, style="Card.TFrame")
         self.controller = controller
 
-        self.gauges_label = ttk.Label(self, text="", font=("Helvetica", 16, "bold"), bootstyle="info")
-        self.gauges_label.pack(pady=10)
+        # Création d'un frame pour les jauges avec icônes
+        self.gauges_frame = ttk.Frame(self)
+        self.gauges_frame.pack(pady=10)
+        self.budget_label = ttk.Label(self.gauges_frame, text="", image=self.controller.budget_icon, compound="left", style="TLabel")
+        self.budget_label.pack(side="left", padx=10)
+        self.bonheur_label = ttk.Label(self.gauges_frame, text="", image=self.controller.bonheur_icon, compound="left", style="TLabel")
+        self.bonheur_label.pack(side="left", padx=10)
+        self.epargne_label = ttk.Label(self.gauges_frame, text="", image=self.controller.epargne_icon, compound="left", style="TLabel")
+        self.epargne_label.pack(side="left", padx=10)
 
         self.card_frame = ttk.Frame(self, style="Card.TFrame")
         self.card_frame.pack(pady=20, padx=20)
@@ -268,8 +319,7 @@ class GameFrame(ttk.Frame):
         self.question_label = ttk.Label(self.card_frame, text="", wraplength=500, style="Question.TLabel")
         self.question_label.pack(side="left", padx=10, pady=10)
 
-        # Suppression de l'ancien label d'explication
-
+        # Suppression du label d'explication ; remplacé par le bouton raccourcis
         self.buttons_frame = ttk.Frame(self)
         self.buttons_frame.pack(pady=10)
 
@@ -280,7 +330,6 @@ class GameFrame(ttk.Frame):
             command=lambda: self.choice("A"),
             bootstyle="success"
         )
-        # Ajout de l'indicateur pour la flèche gauche
         self.optionA_button.grid(row=0, column=0, padx=20, pady=10)
         self.optionB_button = ttk.Button(
             self.buttons_frame,
@@ -289,7 +338,6 @@ class GameFrame(ttk.Frame):
             command=lambda: self.choice("B"),
             bootstyle="danger"
         )
-        # Ajout de l'indicateur pour la flèche droite
         self.optionB_button.grid(row=0, column=1, padx=20, pady=10)
 
         if controller.logo_photo:
@@ -310,7 +358,6 @@ class GameFrame(ttk.Frame):
             )
         self.indice_button.pack(pady=10)
 
-        # Nouveau bouton pour afficher les raccourcis
         self.shortcuts_button = ttk.Button(
             self,
             text="Afficher les raccourcis",
@@ -326,8 +373,10 @@ class GameFrame(ttk.Frame):
         self.quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, bootstyle="secondary")
         self.quit_button.pack(pady=10)
 
-    def update_gauges_label(self, text):
-        self.gauges_label.config(text=text)
+    def update_gauges_label(self, budget, bonheur, epargne):
+        self.budget_label.config(text=f"Budget: {budget}")
+        self.bonheur_label.config(text=f"Bonheur: {bonheur}")
+        self.epargne_label.config(text=f"Épargne: {epargne}")
 
     def set_card(self, card):
         self.current_card = card
@@ -351,8 +400,8 @@ class GameFrame(ttk.Frame):
         shortcuts = (
             "Raccourcis :\n"
             "- 'i' : Afficher l'indice\n"
-            "- Flèche gauche (←) : Sélectionner l'option A ou passer à la question suivante\n"
-            "- Flèche droite (→) : Sélectionner l'option B ou passer à la question suivante\n"
+            "- Flèche gauche (←) : Sélectionner l'option A ou passer\n"
+            "- Flèche droite (→) : Sélectionner l'option B ou passer\n"
             "- Entrée : Valider la réponse (quiz) ou passer à la question suivante (jeu)\n"
             "- Flèches haut (↑)/bas (↓) dans le quiz : Naviguer entre les options"
         )
@@ -399,7 +448,7 @@ class QuizFrame(ttk.Frame):
         self.quit_button = ttk.Button(self, text="Quitter", command=self.controller.destroy, style="Quiz.TButton")
         self.quit_button.pack(pady=10)
 
-        # Bindings pour naviguer dans le quiz
+        # Bindings pour naviguer dans le quiz avec Entrée, Up et Down
         self.bind("<Return>", lambda event: self.submit_answer())
         self.bind("<Up>", self.on_up_arrow)
         self.bind("<Down>", self.on_down_arrow)

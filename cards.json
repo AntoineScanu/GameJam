@@ -4,12 +4,12 @@
     "hint": "Accepter l'offre augmente vos revenus mais réduit votre temps libre.",
     "optionA": {
       "text": "Accepter l'offre",
-      "effects": {"budget": 15, "loisirs": -5, "epargne": 0},
+      "effects": {"budget": 15, "bonheur": -5, "epargne": 0},
       "explanation": "Vous gagnez de l'argent, mais votre temps libre diminue."
     },
     "optionB": {
       "text": "Refuser l'offre",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": 5, "epargne": 0},
       "explanation": "Votre situation financière reste inchangée, mais votre temps libre reste intact."
     }
   },
@@ -18,12 +18,12 @@
     "hint": "Acheter le smartphone peut améliorer votre quotidien, mais réduira vos économies.",
     "optionA": {
       "text": "Acheter le smartphone",
-      "effects": {"budget": -20, "loisirs": 0, "epargne": -10},
+      "effects": {"budget": -20, "bonheur": 10, "epargne": -10},
       "explanation": "Vous dépensez une somme importante et réduisez votre épargne."
     },
     "optionB": {
       "text": "Laisser passer l'offre",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
       "explanation": "Vous décidez d'attendre une meilleure opportunité."
     }
   },
@@ -32,12 +32,12 @@
     "hint": "L'investissement comporte des risques, mais peut rapporter gros.",
     "optionA": {
       "text": "Investir",
-      "effects": {"budget": -10, "loisirs": 0, "epargne": 15},
+      "effects": {"budget": -10, "bonheur": 0, "epargne": 15},
       "explanation": "L'investissement peut booster votre épargne, mais comporte un risque important."
     },
     "optionB": {
       "text": "Refuser",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
       "explanation": "Vous évitez le risque, mais ne profitez pas d'un potentiel gain."
     }
   },
@@ -46,12 +46,12 @@
     "hint": "La voiture est indispensable, mais la réparation peut peser lourd sur votre budget.",
     "optionA": {
       "text": "Payer la réparation",
-      "effects": {"budget": -5, "loisirs": 0, "epargne": -15},
+      "effects": {"budget": -5, "bonheur": 5, "epargne": -15},
       "explanation": "La réparation est coûteuse, mais indispensable pour votre mobilité."
     },
     "optionB": {
       "text": "Reporter la réparation",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": -5, "epargne": 0},
       "explanation": "Reporter la réparation risque d'aggraver la situation à long terme."
     }
   },
@@ -60,12 +60,12 @@
     "hint": "L'activité physique est bénéfique, mais l'abonnement a un coût fixe.",
     "optionA": {
       "text": "Souscrire à l'abonnement",
-      "effects": {"budget": -15, "loisirs": 5, "epargne": 0},
+      "effects": {"budget": -15, "bonheur": 5, "epargne": 0},
       "explanation": "Vous investissez dans votre santé malgré le coût."
     },
     "optionB": {
       "text": "Ne pas souscrire",
-      "effects": {"budget": 0, "loisirs": -5, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": -5, "epargne": 0},
       "explanation": "Vous économisez, mais risquez de moins profiter d'activités sportives."
     }
   },
@@ -74,12 +74,12 @@
     "hint": "Ce voyage sera enrichissant mais coûteux.",
     "optionA": {
       "text": "Partir en week-end",
-      "effects": {"budget": -25, "loisirs": 20, "epargne": 0},
+      "effects": {"budget": -25, "bonheur": 20, "epargne": 0},
       "explanation": "Vous vivez une belle aventure, mais votre budget en prend un coup."
     },
     "optionB": {
       "text": "Rester chez vous",
-      "effects": {"budget": 0, "loisirs": -5, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": -10, "epargne": 0},
       "explanation": "Vous économisez, mais ratez une opportunité d'aventure."
     }
   },
@@ -88,12 +88,12 @@
     "hint": "Un nouvel appartement améliore votre qualité de vie, mais augmente vos dépenses.",
     "optionA": {
       "text": "Emménager",
-      "effects": {"budget": -40, "loisirs": 0, "epargne": -10},
+      "effects": {"budget": -40, "bonheur": 10, "epargne": -10},
       "explanation": "Vous gagnez en confort, mais votre budget est fortement impacté."
     },
     "optionB": {
       "text": "Rester dans l'actuel",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": -5, "epargne": 0},
       "explanation": "Votre espace de vie reste limité, mais vos finances sont préservées."
     }
   },
@@ -102,12 +102,12 @@
     "hint": "Investir en vous-même peut être payant sur le long terme.",
     "optionA": {
       "text": "Suivre la formation",
-      "effects": {"budget": -10, "loisirs": -5, "epargne": 0},
+      "effects": {"budget": -10, "bonheur": -5, "epargne": 0},
       "explanation": "Vous investissez dans votre développement personnel malgré un impact immédiat sur votre budget."
     },
     "optionB": {
       "text": "Ne pas suivre",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
       "explanation": "Vous évitez la dépense, mais ratez une opportunité d'amélioration."
     }
   },
@@ -116,12 +116,12 @@
     "hint": "Les achats impulsifs peuvent nuire à votre gestion financière.",
     "optionA": {
       "text": "Acheter",
-      "effects": {"budget": -15, "loisirs": 5, "epargne": -5},
+      "effects": {"budget": -15, "bonheur": 5, "epargne": -5},
       "explanation": "Vous profitez des soldes, mais cela affecte négativement vos économies."
     },
     "optionB": {
       "text": "Refuser",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
       "explanation": "Vous préférez économiser, même si l'offre semble attrayante."
     }
   },
@@ -130,26 +130,26 @@
     "hint": "Prêter de l'argent comporte un risque financier, surtout sans garantie.",
     "optionA": {
       "text": "Prêter l'argent",
-      "effects": {"budget": -20, "loisirs": 0, "epargne": -10},
+      "effects": {"budget": -20, "bonheur": 0, "epargne": -10},
       "explanation": "Vous aidez votre ami, mais cela peut fragiliser vos finances."
     },
     "optionB": {
       "text": "Refuser",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
       "explanation": "Vous évitez le risque financier, même si cela peut affecter votre relation."
     }
   },
   {
     "question": "Vous avez la possibilité de suivre un cours de cuisine pour améliorer vos compétences culinaires. Vous inscrivez-vous ?",
-    "hint": "Le cours peut améliorer votre qualité de vie et vos loisirs.",
+    "hint": "Le cours peut améliorer votre qualité de vie et vos bonheur.",
     "optionA": {
       "text": "S'inscrire au cours",
-      "effects": {"budget": -10, "loisirs": 10, "epargne": 0},
-      "explanation": "Le cours de cuisine enrichit vos loisirs et votre quotidien."
+      "effects": {"budget": -10, "bonheur": 10, "epargne": 0},
+      "explanation": "Le cours de cuisine enrichit vos bonheur et votre quotidien."
     },
     "optionB": {
       "text": "Ne pas s'inscrire",
-      "effects": {"budget": 0, "loisirs": -5, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": -5, "epargne": 0},
       "explanation": "Vous économisez, mais passez à côté d'une expérience enrichissante."
     }
   },
@@ -158,12 +158,12 @@
     "hint": "Le crédit peut vous aider à financer vos projets, mais il comporte des risques.",
     "optionA": {
       "text": "Souscrire au crédit",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 10},
+      "effects": {"budget": 0, "bonheur": 5, "epargne": 10},
       "explanation": "Le crédit augmente votre capacité d'investissement, mais implique des remboursements futurs."
     },
     "optionB": {
       "text": "Refuser le crédit",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": -5, "epargne": 0},
       "explanation": "Vous évitez l'endettement, même si cela limite vos projets."
     }
   },
@@ -172,12 +172,12 @@
     "hint": "Le programme de fidélité peut vous faire économiser sur vos achats quotidiens.",
     "optionA": {
       "text": "Adhérer au programme",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 5},
+      "effects": {"budget": 0, "bonheur": 5, "epargne": 5},
       "explanation": "Les réductions améliorent votre gestion budgétaire."
     },
     "optionB": {
       "text": "Ne pas adhérer",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
       "explanation": "Vous ne modifiez pas vos habitudes, mais manquez des économies potentielles."
     }
   },
@@ -186,12 +186,12 @@
     "hint": "L'immobilier peut générer des revenus, mais demande un apport initial important.",
     "optionA": {
       "text": "Investir dans l'immobilier",
-      "effects": {"budget": -40, "loisirs": 0, "epargne": 30},
+      "effects": {"budget": -40, "bonheur": 0, "epargne": 30},
       "explanation": "L'investissement immobilier peut rapporter sur le long terme, mais réduit votre budget initial."
     },
     "optionB": {
       "text": "Ne pas investir",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": 0, "epargne": 0},
       "explanation": "Vous évitez un gros investissement, mais manquez une opportunité de revenu."
     }
   },
@@ -200,12 +200,12 @@
     "hint": "Des vacances de luxe améliorent votre bien-être, mais elles coûtent cher.",
     "optionA": {
       "text": "Réserver les vacances",
-      "effects": {"budget": -30, "loisirs": 25, "epargne": -5},
+      "effects": {"budget": -30, "bonheur": 25, "epargne": -5},
       "explanation": "Vous vivez une expérience de rêve, mais votre budget en prend un coup."
     },
     "optionB": {
       "text": "Ne pas réserver",
-      "effects": {"budget": 0, "loisirs": -5, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": -5, "epargne": 0},
       "explanation": "Vous préférez économiser, même si vous ratez l'occasion d'une expérience luxueuse."
     }
   },
@@ -214,12 +214,12 @@
     "hint": "Des rendements garantis aussi élevés sont extrêmement rares.",
     "optionA": {
       "text": "J'investi toutes mes econnomies !",
-      "effects": {"budget": -20, "loisirs": 0, "epargne": -50},
+      "effects": {"budget": -20, "bonheur": -20, "epargne": -50},
       "explanation": "Le produit s'est avéré frauduleux, et vous subissez de lourdes pertes."
     },
     "optionB": {
       "text": "Refuser",
-      "effects": {"budget": 0, "loisirs": 0, "epargne": 0},
+      "effects": {"budget": 0, "bonheur": 10, "epargne": 0},
       "explanation": "Vous évitez une arnaque potentielle."
     }
   }
